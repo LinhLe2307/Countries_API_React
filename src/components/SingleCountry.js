@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 import classes from "./SingleCountry.module.css";
 import axios from "axios";
-import { getAll } from "../fetchAPI";
 
 const SingleCountry = () => {
   let location = useLocation();
@@ -23,14 +22,14 @@ const SingleCountry = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    console.log(weather);
-  }, [weather]);
+  // useEffect(() => {
+  //   console.log(weather);
+  // }, [weather]);
 
   return (
     <div className={classes["single-card"]}>
       <h1>{name.common}</h1>
-      <img src={flags.png} />
+      <img src={flags.png} alt={`${name.common}`} />
       <ul>
         Languages{" "}
         {languages &&

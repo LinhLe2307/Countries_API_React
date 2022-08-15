@@ -7,3 +7,24 @@
 body {
   font-family: "Raleway", sans-serif;
 }
+
+header {
+  height: 3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+main {
+  background-image: url("https://images.unsplash.com/photo-1589519160732-57fc498494f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80");
+}
+
+a {
+  border-bottom: none;
+}
+
+input {
+  width: 15rem;
+  height: 2rem;
+}
