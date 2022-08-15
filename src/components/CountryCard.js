@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
 const CountryCard = ({ country }) => {
-  const { languages, name, currencies, flags } = country;
-  // const languagesList = languages && Object.values(languages);
-  // const currenciesList = currencies && Object.values(currencies);
-
+  const { languages, name, currencies, flags, capital, population } = country;
   return (
     <div className={`${classes.card}`}>
       <Link
@@ -27,22 +24,21 @@ const CountryCard = ({ country }) => {
           Object.values(languages).map((language, i) => (
             <li key={i}>{language}</li>
           ))}
-        {/* {languages &&
-          languagesList.map((language, i) => <li key={i}>{language}</li>)} */}
       </ul>
       <ul>
         Currencies
-        {/* {currencies &&
-          currenciesList.map((currency, i) => (
-            <li key={i}>{`${currency.name}`}</li>
-          ))} */}
         {currencies &&
           Object.values(currencies).map((currency, i) => (
             <li key={i}>{`${currency.name}`}</li>
           ))}
       </ul>
+      <ul>
+        Capital
+        {capital && capital.map((capital, i) => <li key={i}>{capital}</li>)}
+      </ul>
 
       <img src={flags.png} className={`${classes.flag}`} />
+      <p>population {population}</p>
     </div>
   );
 };
