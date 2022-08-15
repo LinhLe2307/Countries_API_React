@@ -3,18 +3,15 @@ import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
 const CountryCard = ({ country }) => {
   const { languages, name, currencies, flags } = country;
-  const languagesList = languages && Object.values(languages);
-  const currenciesList = currencies && Object.values(currencies);
+  // const languagesList = languages && Object.values(languages);
+  // const currenciesList = currencies && Object.values(currencies);
 
   return (
     <div className={`${classes.card}`}>
       <Link
         to={`${name.common}`}
         state={{
-          languages: languages,
-          name: name,
-          currencies: currencies,
-          flags: flags,
+          country: country,
         }}
       >
         <img
