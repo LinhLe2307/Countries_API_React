@@ -1,0 +1,19 @@
+.card {
+  border: 1px solid black;
+  position: relative;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.image {
+  width: 100%;
+}
+
+.flag {
+  position: absolute;
+  top: -30px;
+  right: -15px;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}

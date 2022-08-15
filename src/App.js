@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./pages/Layout";
 import HomePage from "./components/HomePage";
 import Countries from "./components/Countries";
+import SingleCountry from "./components/SingleCountry";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="countries" element={<Countries />} />
+          <Route path="countries/:country" element={<SingleCountry />} />
         </Route>
       </Routes>
     </BrowserRouter>
