@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAll } from "../fetchAPI";
+import SingleCountry from "./SingleCountry";
+import classes from "./Countries.module.css"
 
 const Countries = () => {
   const [countries, setCountries] = useState([]);
-  getAll("https://restcountries.com/#api-endpoints-v3-all").then(
-    (intialNotes) => setCountries(intialNotes)
+  useEffect(() => {
+    getAll("https://restcountries.com/v3.1/all").then((intialNotes) => {
+      //   console.log(intialNotes);
+      setCountries(intialNotes);
+    });
+  }, []);
+  return (
+    <div className={`${classes.countries}`}>
+      {countries.map((country, i) => (
+        <SingleCountry country={country} key={i} />
+      ))}
+    </div>
   );
-  return <div>Countries</div>;
 };
 
 export default Countries;
