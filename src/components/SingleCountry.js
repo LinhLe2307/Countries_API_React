@@ -17,7 +17,7 @@ const SingleCountry = () => {
   let api = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
-    console.log(location);
+    // console.log(location);
     // Get capital API
     const capitalList = capital.map((cap) => {
       return axios.get(
@@ -44,7 +44,7 @@ const SingleCountry = () => {
       <img src={flags.png} alt={`${name.common}`} />
 
       {/* ----------------LANGUAGES ------------------ */}
-      <h1>Languages</h1>
+      <h2>Languages</h2>
       <ul>
         {languages &&
           Object.values(languages).map((language, i) => (
@@ -53,7 +53,7 @@ const SingleCountry = () => {
       </ul>
 
       {/* ----------------CURRENCIES ------------------ */}
-      <h1>Currencies</h1>
+      <h2>Currencies</h2>
       <ul>
         {currencies &&
           Object.values(currencies).map((currency, i) => (
@@ -62,10 +62,10 @@ const SingleCountry = () => {
       </ul>
 
       {/* ----------------WEATHER ------------------ */}
-      <h1>Weather</h1>
+      <h2>Weather</h2>
       {weather.map((weather, i) => (
         <div key={i}>
-          <h1>Capital {weather.data.name}</h1>
+          <h3>Capital: {weather.data.name}</h3>
           <div>
             {Object.entries(weather.data.main).map(([key, value], i) => (
               <li key={i}>
@@ -76,7 +76,7 @@ const SingleCountry = () => {
         </div>
       ))}
 
-      <h1>Borders</h1>
+      <h2>Borders</h2>
       {borderCountries
         ? borderCountries.map((borderCountry, i) => {
             const newBorderName = borderCountry.name.common.replaceAll(

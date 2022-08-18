@@ -10,7 +10,6 @@ const Countries = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = (e) => {
-    console.log(e.target.value);
     const newCountriesList = countries.filter(
       (country) =>
         country.name.common
@@ -20,7 +19,7 @@ const Countries = () => {
     setSearchInput(e.target.value);
     setFilterCountries(newCountriesList);
   };
-  
+
   useEffect(() => {
     setIsLoading((prev) => !prev);
     getAll("https://restcountries.com/v3.1/all")
