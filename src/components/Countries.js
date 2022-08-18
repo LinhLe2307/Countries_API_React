@@ -13,11 +13,14 @@ const Countries = () => {
     console.log(e.target.value);
     const newCountriesList = countries.filter(
       (country) =>
-        country.name.common.toLowerCase().indexOf(e.target.value) !== -1
+        country.name.common
+          .toLowerCase()
+          .indexOf(e.target.value.toLowerCase()) !== -1
     );
     setSearchInput(e.target.value);
     setFilterCountries(newCountriesList);
   };
+  
   useEffect(() => {
     setIsLoading((prev) => !prev);
     getAll("https://restcountries.com/v3.1/all")
@@ -28,6 +31,7 @@ const Countries = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
   if (isLoading) {
     return <p>Loading</p>;
   }
@@ -36,7 +40,7 @@ const Countries = () => {
       <input defaultValue={searchInput} onChange={(e) => handleSearch(e)} />
       <div className={`${classes.countries}`}>
         {filterCountries.map((country, i) => (
-          <CountryCard country={country} key={i} />
+          <CountryCard country={country} key={i} countries={countries} />
         ))}
       </div>
     </div>

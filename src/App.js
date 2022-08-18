@@ -14,6 +14,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="countries" element={<Countries />} />
           <Route path="countries/:country" element={<SingleCountry />} />
+          <Route path="/countries/Palau" element={<SingleCountry />} />
         </Route>
       </Routes>
     </BrowserRouter>

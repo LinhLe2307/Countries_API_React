@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
-const CountryCard = ({ country }) => {
+const CountryCard = ({ country, countries }) => {
   const { languages, name, currencies, flags, capital, population } = country;
+  const urlName = name.common.replaceAll(" ", "-");
+
   return (
     <div className={`${classes.card}`}>
       <Link
-        to={`${name.common}`}
+        to={`${urlName}`}
         state={{
           country: country,
+          countries: countries,
         }}
       >
         <img
