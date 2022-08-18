@@ -78,19 +78,25 @@ const SingleCountry = () => {
 
       <h1>Borders</h1>
       {borderCountries
-        ? borderCountries.map((borderCountry, i) => (
-            <div key={i}>
-              <Link
-                to={`/countries/${borderCountry.name.common}`}
-                state={{
-                  country: borderCountry,
-                  countries: location.state.countries,
-                }}
-              >
-                {borderCountry.name.common}
-              </Link>
-            </div>
-          ))
+        ? borderCountries.map((borderCountry, i) => {
+            const newBorderName = borderCountry.name.common.replaceAll(
+              " ",
+              "-"
+            );
+            return (
+              <div key={i}>
+                <Link
+                  to={`/countries/${newBorderName}`}
+                  state={{
+                    country: borderCountry,
+                    countries: location.state.countries,
+                  }}
+                >
+                  {borderCountry.name.common}
+                </Link>
+              </div>
+            );
+          })
         : "No borders"}
     </div>
   );
