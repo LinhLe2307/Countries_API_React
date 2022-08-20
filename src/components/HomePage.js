@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import classes from './Homepage.module.css'
 
 const HomePage = () => {
   return (
-    <div>
-      
+    <div className={`${classes.container}`}>
+      <h1>Countries</h1>
     </div>
   )
 }

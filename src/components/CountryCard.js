@@ -1,6 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
+
+const numberFormatter = (num) => {
+  if(num >= 1000000000) {
+    return (num / 1000000000).toFixed(2) + ' G'
+  }
+  if(num >= 1000000) {
+    return (num / 1000000).toFixed(2) + ' M'
+  }
+  if(num >= 10000) {
+    return (num / 10000).toFixed(2) + ' K'
+  }
+}
+
 const CountryCard = ({ country, countries }) => {
   const { languages, name, currencies, flags, capital, population } = country;
   const urlName = name.common.replaceAll(" ", "-");
@@ -23,27 +36,33 @@ const CountryCard = ({ country, countries }) => {
 
       <h1>{name.common}</h1>
       <div className={`${classes.context}`}>
-        <ul>
+        <div>
           LANGUAGES
-          {languages &&
-            Object.values(languages).map((language, i) => (
-              <li key={i}>{language}</li>
-            ))}
-        </ul>
-        <ul>
+          <ul>
+            {languages &&
+              Object.values(languages).map((language, i) => (
+                <li key={i}>{language}</li>
+                ))}
+          </ul>
+        </div>
+        <div>
           CURRENCIES
-          {currencies &&
-            Object.values(currencies).map((currency, i) => (
-              <li key={i}>{`${currency.name}`}</li>
-            ))}
-        </ul>
-
+          <ul>
+            {currencies &&
+              Object.values(currencies).map((currency, i) => (
+                <li key={i}>{`${currency.name}`}</li>
+              ))}
+          </ul>
+        </div>
         <img
           src={flags.png}
           className={`${classes.flag}`}
           alt={`${name.common}`}
         />
-        <p>POPULATION {population}</p>
+        <div>
+          POPULATION 
+          <p>{numberFormatter(population)}</p>
+        </div>
       </div>
     </div>
   );
