@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -14,10 +14,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { TextField } from "@mui/material";
 
 const pages = ["HomePage", "Countries"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const Header = () => {
+const Header = ({ handleSearch, searchInput }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -136,6 +136,7 @@ const Header = () => {
               </div>
             ))}
           </Box>
+
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -165,6 +166,13 @@ const Header = () => {
               ))}
             </Menu>
           </Box> */}
+          <TextField
+            defaultValue={searchInput}
+            onChange={(e) => handleSearch(e)}
+            label="Search"
+            color="secondary"
+            focused
+          />
         </Toolbar>
       </Container>
     </AppBar>

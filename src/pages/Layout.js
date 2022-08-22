@@ -2,10 +2,10 @@ import React from "react";
 import Header from "../components/Header";
 import MainPage from "../components/MainPage";
 
-const Layout = () => {
+const Layout = ({searchInput, handleSearch}) => {
   return (
     <>
-      <Header />
+      <Header handleSearch={handleSearch} searchInput={searchInput} />
       <MainPage />
     </>
   );

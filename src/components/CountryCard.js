@@ -1,4 +1,11 @@
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./CountryCard.module.css";
@@ -55,18 +62,18 @@ const CountryCard = ({ country, countries }) => {
     //           ))}
     //       </ul>
     //     </div>
-    //     <img
-    //       src={flags.png}
-    //       className={`${classes.flag}`}
-    //       alt={`${name.common}`}
-    //     />
+    // <img
+    //   src={flags.png}
+    //   className={`${classes.flag}`}
+    //   alt={`${name.common}`}
+    // />
     //     <div>
     //       POPULATION
     //       <p>{numberFormatter(population)}</p>
     //     </div>
     //   </div>
     // </div>
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, position: "relative" }}>
       <Link
         to={`${urlName}`}
         state={{
@@ -77,8 +84,9 @@ const CountryCard = ({ country, countries }) => {
         <CardMedia
           component="img"
           height="194"
-          image="https://images.unsplash.com/photo-1661147338478-03c1893fd330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-          alt="Country"
+          // image="https://images.unsplash.com/photo-1661147338478-03c1893fd330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+          image={`${flags.png}`}
+          alt={`${name.common}`}
         />
       </Link>
       <CardContent
