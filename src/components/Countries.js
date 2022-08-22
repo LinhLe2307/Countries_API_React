@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CountryCard from "./CountryCard";
 import classes from "./Countries.module.css";
 import { getAll } from "../fetchAPI";
+import { TextField } from "@mui/material";
 
 const Countries = () => {
   const [countries, setCountries] = useState([]);
@@ -36,7 +37,13 @@ const Countries = () => {
   }
   return (
     <div className={`${classes.container}`}>
-      <input defaultValue={searchInput} onChange={(e) => handleSearch(e)} />
+      <TextField
+        defaultValue={searchInput}
+        onChange={(e) => handleSearch(e)}
+        label="Search"
+        color="secondary"
+        focused
+      />
       <div className={`${classes.countries}`}>
         {filterCountries.map((country, i) => (
           <CountryCard country={country} key={i} countries={countries} />
