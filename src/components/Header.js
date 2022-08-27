@@ -17,6 +17,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { TextField } from "@mui/material";
 
 const pages = ["HomePage", "Countries"];
+const settings = ['Account', 'Log Out'];
 const Header = ({ handleSearch, searchInput }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -136,8 +137,14 @@ const Header = ({ handleSearch, searchInput }) => {
               </div>
             ))}
           </Box>
-
-          {/* <Box sx={{ flexGrow: 0 }}>
+            <TextField
+            defaultValue={searchInput}
+            onChange={(e) => handleSearch(e)}
+            label="Search"
+            color="secondary"
+            focused
+          />
+          <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -165,14 +172,8 @@ const Header = ({ handleSearch, searchInput }) => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> */}
-          <TextField
-            defaultValue={searchInput}
-            onChange={(e) => handleSearch(e)}
-            label="Search"
-            color="secondary"
-            focused
-          />
+          </Box>
+          
         </Toolbar>
       </Container>
     </AppBar>
