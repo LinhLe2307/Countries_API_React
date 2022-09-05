@@ -12,7 +12,7 @@ const SingleCountry = () => {
   const { languages, name, currencies, flags, capital, borders } =
     location.state.country;
 
-  const countries = location.state.countries;
+  // const countries = location.state.countries;
 
   
   useEffect(() => {
@@ -33,14 +33,14 @@ const SingleCountry = () => {
         
     
     
-    // get borders countries names
-    if (borders) {
-      const newBorderList = countries.filter((country) => {
-        return borders.indexOf(country.cca3) !== -1;
-      });
+    // // get borders countries names
+    // if (borders) {
+    //   const newBorderList = countries.filter((country) => {
+    //     return borders.indexOf(country.cca3) !== -1;
+    //   });
 
-      setBorderCountries(newBorderList);
-    }
+    //   setBorderCountries(newBorderList);
+    // }
   }, [location]);
 
   return (
@@ -68,7 +68,7 @@ const SingleCountry = () => {
             ))}
         </ul>
 
-        <ul>
+        {/* <ul>
           <h3>Borders</h3>
           {borderCountries
             ? borderCountries.map((borderCountry, i) => {
@@ -91,7 +91,7 @@ const SingleCountry = () => {
                 );
               })
             : "No borders"}
-          </ul>
+          </ul> */}
       </div>
       {/* ----------------WEATHER ------------------ */}
       <h2>Weather</h2>
