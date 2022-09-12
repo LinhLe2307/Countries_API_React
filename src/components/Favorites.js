@@ -1,13 +1,17 @@
 import React from 'react';
 import {useSelector} from 'react-redux'
+import CountryCard from './CountryCard';
 
 const Favorites = () => {
   const favorites = useSelector(state => state.favorites.fav);
-  console.log(favorites);
   return (
-      favorites.map(favor => <p>{favor.name.common}</p>)
-    
-    
+    <>
+      {
+        favorites.map((favor, i) => 
+          <CountryCard country={favor} key={i}/>
+        )
+      }
+    </>
   )
 }
 

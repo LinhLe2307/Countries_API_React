@@ -4,17 +4,18 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import classes from "./SingleCountry.module.css";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const SingleCountry = () => {
+
   let location = useLocation();
   const [weather, setWeather] = useState([]);
   const [borderCountries, setBorderCountries] = useState();
   const navigate = useNavigate();
+  const countries = useSelector((state) => state.countries.countries);
 
   const { languages, name, currencies, flags, capital, borders } =
     location.state.country;
-
-  const countries = location.state.countries;
 
   useEffect(() => {
     let api = process.env.REACT_APP_API_KEY;

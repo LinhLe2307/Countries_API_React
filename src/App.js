@@ -8,35 +8,15 @@ import Favorites from "./components/Favorites";
 import SingleCountry from "./components/SingleCountry";
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout/>
-          }
-        >
+        <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route
-            path="countries"
-            element={
-              <Countries/>
-            }
-          />
-          <Route 
-            path="countries/:country" 
-            element={
-            <SingleCountry />
-            } 
-          />
-          <Route
-            path="favorites"
-            element={
-              <Favorites />
-            }
-          />
+          <Route path="countries" element={<Countries />} />
+          <Route path="countries/:country" element={<SingleCountry />} />
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="favorites/:country" element={<SingleCountry />} />
         </Route>
       </Routes>
     </BrowserRouter>

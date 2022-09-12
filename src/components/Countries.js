@@ -29,7 +29,7 @@ const Countries = () => {
             c.name.common.toLowerCase().includes(searchInput.toLowerCase())
           )
           .map((country, i) => (
-            <CountryCard country={country} key={i} countries={countriesList} />
+            <CountryCard country={country} key={i}/>
           ))}
       </div>
     </div>

@@ -1,15 +1,24 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const cartSlice = createSlice({
-    name: "favorites",
-    initialState: {
-        fav: []
+  name: "favorites",
+  initialState: {
+    fav: [],
+  },
+  reducers: {
+    getFavorites: (state, action) => {
+      const visitedCountry = action.payload;
+    //   if (
+    //     state.fav.find(
+    //       (country) =>
+    //         country.name.common.indexOf(visitedCountry.name.common) !== -1
+    //     )
+    //   ) {
+    //     state.fav.push(visitedCountry);
+    // }
+    state.fav.push(visitedCountry);
     },
-    reducers: {
-        getFavorites: (state, action) => {
-            state.fav.push(action.payload)
-        }
-    }
+  },
 });
-export const {getFavorites} = cartSlice.actions;
+export const { getFavorites } = cartSlice.actions;
 export default cartSlice.reducer;
