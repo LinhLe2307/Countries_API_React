@@ -81,7 +81,7 @@ const CountryCard = ({ country, countries }) => {
         </Typography>
         <Typography>
           POPULATION
-          <p>{numberFormatter(population)}</p>
+          {numberFormatter(population)}
         </Typography>
       </CardContent>
       <Checkbox {...label} onChange={() => handleFavorites(country)} />
