@@ -1,14 +1,15 @@
 import {
   Avatar,
+  Button,
   Card,
   CardContent,
   CardMedia,
   Checkbox,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getFavorites } from "../features/favorites/cartSlice";
+import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
 
 const numberFormatter = (num) => {
@@ -30,9 +31,13 @@ const CountryCard = ({ country, countries }) => {
   const urlName = name.common.replaceAll(" ", "-");
   const dispatch = useDispatch();
 
-  const handleFavorites = ( favorite) => {
-    console.log(favorite)
-    dispatch(getFavorites(favorite));
+  const handleFavorites = (favorite) => {
+    console.log(favorite);
+    dispatch(addFavorites(favorite));
+  };
+
+  const handleDelete = (favorite) => {
+    dispatch(removeFavorite(favorite));
   };
 
   return (
@@ -80,6 +85,7 @@ const CountryCard = ({ country, countries }) => {
         </Typography>
       </CardContent>
       <Checkbox {...label} onChange={() => handleFavorites(country)} />
+      <Button onClick={() => handleDelete(country)}>Delete</Button>
     </Card>
   );
 };

@@ -6,19 +6,28 @@ export const cartSlice = createSlice({
     fav: [],
   },
   reducers: {
-    getFavorites: (state, action) => {
-      const visitedCountry = action.payload;
-    //   if (
-    //     state.fav.find(
-    //       (country) =>
-    //         country.name.common.indexOf(visitedCountry.name.common) !== -1
-    //     )
-    //   ) {
-    //     state.fav.push(visitedCountry);
-    // }
-    state.fav.push(visitedCountry);
+    addFavorites: (state, action) => {
+    const isChecked = true;
+      const visitedCountry = {...action.payload, isChecked};
+      if (
+        state.fav.find(
+          (country) =>
+            country.name.common.indexOf(visitedCountry.name.common) !== -1
+        ) === undefined
+      ) {
+        state.fav.push(visitedCountry);
+        localStorage.setItem(visitedCountry.name.common, JSON.stringify(visitedCountry))
+    }
+    // state.fav.push(visitedCountry);
     },
+
+    removeFavorite: (state, action) => {
+        const removeCountry = action.payload;
+        state.fav = state.fav.filter(country => country.name.common.indexOf(removeCountry.name.common) !== -1 );
+        localStorage.removeItem(removeCountry.name.common)
+    }
   },
 });
-export const { getFavorites } = cartSlice.actions;
+
+export const { addFavorites, removeFavorite } = cartSlice.actions;
 export default cartSlice.reducer;
