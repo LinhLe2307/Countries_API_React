@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setLocal, getLocal } from "../../services/local";
 
 export const cartSlice = createSlice({
   name: "favorites",
@@ -7,9 +8,7 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addFavorites: (state, action) => {
-      const isChecked = true;
-      const visitedCountry = { ...action.payload, isChecked };
-      const local = JSON.parse(localStorage.getItem("countries"));
+      const visitedCountry = { ...action.payload, isChecked: true };
       if (
         state.fav.find(
           (country) =>
@@ -17,22 +16,26 @@ export const cartSlice = createSlice({
         ) === undefined
       ) {
         state.fav.push(visitedCountry);
-        local
-          ? localStorage.setItem(
-              "countries",
-              JSON.stringify(local.concat(visitedCountry))
-            )
-          : localStorage.setItem("countries", JSON.stringify(state.fav));
+        getLocal()
+          ? setLocal(getLocal().concat(visitedCountry))
+          : setLocal(state.fav);
       }
     },
 
     removeFavorite: (state, action) => {
       const removeCountry = action.payload;
+
       state.fav = state.fav.filter(
         (country) =>
           country.name.common.indexOf(removeCountry.name.common) !== -1
       );
-      localStorage.removeItem(removeCountry.name.common);
+
+      setLocal(
+        getLocal().filter(
+          (country) =>
+            country.name.common.indexOf(removeCountry.name.common) === -1
+        )
+      );
     },
   },
 });
