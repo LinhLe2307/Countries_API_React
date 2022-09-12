@@ -128,7 +128,7 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <div>
+              <div key={page}>
                 {page === "HomePage" ? (
                   <Link to="/">
                     <Typography textAlign="center">Homepage</Typography>
