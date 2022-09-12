@@ -138,7 +138,7 @@ const Header = () => {
                  page === "Favorites" ? (
                   <Link to={`${page.toLowerCase()}`}>
                     <Typography textAlign="center">
-                      {page} {favorites.length}
+                      {page} {localStorage.length}
                     </Typography>
                   </Link>
                 )

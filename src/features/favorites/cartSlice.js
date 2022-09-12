@@ -7,8 +7,9 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addFavorites: (state, action) => {
-    const isChecked = true;
-      const visitedCountry = {...action.payload, isChecked};
+      const isChecked = true;
+      const visitedCountry = { ...action.payload, isChecked };
+      const local = JSON.parse(localStorage.getItem("countries"));
       if (
         state.fav.find(
           (country) =>
@@ -16,16 +17,23 @@ export const cartSlice = createSlice({
         ) === undefined
       ) {
         state.fav.push(visitedCountry);
-        localStorage.setItem(visitedCountry.name.common, JSON.stringify(visitedCountry))
-    }
-    // state.fav.push(visitedCountry);
+        local
+          ? localStorage.setItem(
+              "countries",
+              JSON.stringify(local.concat(visitedCountry))
+            )
+          : localStorage.setItem("countries", JSON.stringify(state.fav));
+      }
     },
 
     removeFavorite: (state, action) => {
-        const removeCountry = action.payload;
-        state.fav = state.fav.filter(country => country.name.common.indexOf(removeCountry.name.common) !== -1 );
-        localStorage.removeItem(removeCountry.name.common)
-    }
+      const removeCountry = action.payload;
+      state.fav = state.fav.filter(
+        (country) =>
+          country.name.common.indexOf(removeCountry.name.common) !== -1
+      );
+      localStorage.removeItem(removeCountry.name.common);
+    },
   },
 });
 
