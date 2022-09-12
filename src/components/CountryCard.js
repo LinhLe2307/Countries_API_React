@@ -3,12 +3,13 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Grid,
+  Checkbox,
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { getFavorites } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
-import classes from "./CountryCard.module.css";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -22,9 +23,17 @@ const numberFormatter = (num) => {
   }
 };
 
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 const CountryCard = ({ country, countries }) => {
   const { languages, name, currencies, flags, capital, population } = country;
   const urlName = name.common.replaceAll(" ", "-");
+  const dispatch = useDispatch();
+
+  const handleFavorites = ( favorite) => {
+    console.log(favorite)
+    dispatch(getFavorites(favorite));
+  };
 
   return (
     <Card sx={{ maxWidth: 345, position: "relative" }}>
@@ -70,6 +79,7 @@ const CountryCard = ({ country, countries }) => {
           <p>{numberFormatter(population)}</p>
         </Typography>
       </CardContent>
+      <Checkbox {...label} onChange={() => handleFavorites(country)} />
     </Card>
   );
 };
