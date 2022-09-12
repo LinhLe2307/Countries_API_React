@@ -17,6 +17,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 import SearchCountries from "./SearchCountries";
 import { useSelector } from "react-redux";
+import { getLocal } from "../services/local";
 
 const pages = ["HomePage" , "Countries", "Favorites"];
 const settings = ["Account", "Log Out"];
@@ -138,7 +139,7 @@ const Header = () => {
                  page === "Favorites" ? (
                   <Link to={`${page.toLowerCase()}`}>
                     <Typography textAlign="center">
-                      {page} {localStorage.length}
+                      {page} {getLocal().length}
                     </Typography>
                   </Link>
                 )
