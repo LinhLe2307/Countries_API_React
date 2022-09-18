@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import countryService from "../../services/countries";
+import { getLocal } from "../../services/local";
 
 export const countriesSlice = createSlice({
   name: "countries",
@@ -19,7 +20,7 @@ export const countriesSlice = createSlice({
 
     search: (state, action) => {
       state.search = action.payload;
-    }
+    },
   },
 });
 

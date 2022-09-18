@@ -7,7 +7,7 @@ import {
   Checkbox,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
@@ -27,12 +27,13 @@ const numberFormatter = (num) => {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CountryCard = ({ country, countries }) => {
-  const { languages, name, currencies, flags, capital, population } = country;
+  const { languages, name, currencies, flags, isChecked, capital, population } =
+    country;
+
   const urlName = name.common.replaceAll(" ", "-");
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
-    console.log(favorite);
     dispatch(addFavorites(favorite));
   };
 
@@ -84,8 +85,18 @@ const CountryCard = ({ country, countries }) => {
           {numberFormatter(population)}
         </Typography>
       </CardContent>
-      <Checkbox {...label} onChange={() => handleFavorites(country)} />
-      <Button onClick={() => handleDelete(country)}>Delete</Button>
+
+      {!isChecked ? (
+        <Checkbox
+          {...label}
+          onChange={() => {
+            handleFavorites(country);
+            // handleDisplay();
+          }}
+        />
+      ) : (
+        <Button onClick={() => handleDelete(country)}>Delete</Button>
+      )}
     </Card>
   );
 };

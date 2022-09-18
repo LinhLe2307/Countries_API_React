@@ -15,7 +15,10 @@ const Favorites = () => {
     <div className={`${classes.container}`}>
       <div className={`${classes.countries}`}>
         {favCountries.map((country) => (
-          <CountryCard country={country} key={country.name.common} />
+          <CountryCard 
+            country={country} 
+            key={country.name.common} 
+          />
         ))}
       </div>
     </div>
