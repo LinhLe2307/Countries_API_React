@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import CountryCard from "./CountryCard";
-import { useSelector, useDispatch } from "react-redux";
 import {
   initializeCountries,
   search,
   getCountries,
 } from "../features/countries/countriesSlice";
+import classes from "./modules/Countries.module.css";
 // import { getLocal } from "../services/local";
-import classes from "./Countries.module.css";
 
 const Countries = () => {
   // const [displayedList, setDisplayedList] = useState([]);

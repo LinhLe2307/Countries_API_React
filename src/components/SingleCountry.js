@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import classes from "./SingleCountry.module.css";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
+
+import classes from "./modules/SingleCountry.module.css";
 
 const SingleCountry = () => {
   let location = useLocation();

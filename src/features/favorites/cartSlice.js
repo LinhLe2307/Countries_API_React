@@ -5,7 +5,6 @@ export const cartSlice = createSlice({
   name: "favorites",
   initialState: {
     fav: [],
-    // isChecked: true,
   },
   reducers: {
     addFavorites: (state, action) => {
