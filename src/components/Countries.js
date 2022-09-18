@@ -8,11 +8,8 @@ import {
   getCountries,
 } from "../features/countries/countriesSlice";
 import classes from "./modules/Countries.module.css";
-// import { getLocal } from "../services/local";
 
 const Countries = () => {
-  // const [displayedList, setDisplayedList] = useState([]);
-  // const favorites = useSelector((state) => state.favorites.fav);
   const countriesList = useSelector((state) => state.countries.countries);
   const isLoading = useSelector((state) => state.countries.isLoading);
   const searchInput = useSelector((state) => state.countries.search);
@@ -21,22 +18,6 @@ const Countries = () => {
   useEffect(() => {
     dispatch(initializeCountries());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   const newList = countriesList.map((country) => {
-  //     const selectedCountry = getLocal().find(
-  //       (visitedCountry) => visitedCountry.name.common === country.name.common
-  //     );
-  //     return selectedCountry !== undefined
-  //       ? { ...country, isChecked: true }
-  //       : { ...country, isChecked: false };
-  //   });
-  //   setDisplayedList(newList);
-  // }, [favorite]);
-
-  // useEffect(() => {
-  //   setDisplayedList(countriesList);
-  // }, []);
 
   if (isLoading) {
     <p>Is loading</p>;
