@@ -41,6 +41,7 @@ const CountryCard = ({ country, countries }) => {
 
   const handleDelete = (favorite) => {
     dispatch(removeFavorite(favorite));
+    setDeleteButton((prev) => !prev)
   };
 
   return (
