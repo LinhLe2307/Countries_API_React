@@ -7,7 +7,7 @@ import {
   Checkbox,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
@@ -31,10 +31,12 @@ const CountryCard = ({ country, countries }) => {
     country;
 
   const urlName = name.common.replaceAll(" ", "-");
+  // const [deleteButton, setDeleteButton] = useState(isChecked);
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
     dispatch(addFavorites(favorite));
+    // setDeleteButton((prev) => !prev);
   };
 
   const handleDelete = (favorite) => {

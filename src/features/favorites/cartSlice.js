@@ -10,7 +10,6 @@ export const cartSlice = createSlice({
   reducers: {
     addFavorites: (state, action) => {
       const visitedCountry = { ...action.payload, isChecked: true };
-      // const visitedCountry = action.payload;
       if (
         state.fav.find(
           (country) =>
