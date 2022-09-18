@@ -11,7 +11,7 @@ export const cartSlice = createSlice({
     addFavorites: (state, action) => {
       const visitedCountry = { ...action.payload, isChecked: true };
       if (
-        state.fav.find(
+        getLocal().find(
           (country) =>
             country.name.common.indexOf(visitedCountry.name.common) !== -1
         ) === undefined

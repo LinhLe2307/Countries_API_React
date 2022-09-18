@@ -31,12 +31,12 @@ const CountryCard = ({ country, countries }) => {
     country;
 
   const urlName = name.common.replaceAll(" ", "-");
-  // const [deleteButton, setDeleteButton] = useState(isChecked);
+  const [deleteButton, setDeleteButton] = useState(isChecked);
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
     dispatch(addFavorites(favorite));
-    // setDeleteButton((prev) => !prev);
+    setDeleteButton((prev) => !prev);
   };
 
   const handleDelete = (favorite) => {
@@ -88,12 +88,11 @@ const CountryCard = ({ country, countries }) => {
         </Typography>
       </CardContent>
 
-      {!isChecked ? (
+      {!deleteButton ? (
         <Checkbox
           {...label}
           onChange={() => {
             handleFavorites(country);
-            // handleDisplay();
           }}
         />
       ) : (
