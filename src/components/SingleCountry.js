@@ -7,7 +7,6 @@ import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const SingleCountry = () => {
-
   let location = useLocation();
   const [weather, setWeather] = useState([]);
   const [borderCountries, setBorderCountries] = useState();
@@ -19,7 +18,6 @@ const SingleCountry = () => {
 
   useEffect(() => {
     let api = process.env.REACT_APP_API_KEY;
-    console.log(capital);
     // Get capital API
     const capitalList = capital.map((cap) => {
       return axios.get(

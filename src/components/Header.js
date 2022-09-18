@@ -19,7 +19,7 @@ import SearchCountries from "./SearchCountries";
 import { useSelector } from "react-redux";
 import { getLocal } from "../services/local";
 
-const pages = ["HomePage" , "Countries", "Favorites"];
+const pages = ["HomePage", "Countries", "Favorites"];
 const settings = ["Account", "Log Out"];
 
 const Header = () => {
@@ -134,20 +134,15 @@ const Header = () => {
                   <Link to="/">
                     <Typography textAlign="center">Homepage</Typography>
                   </Link>
-                ) 
-                :
-                 page === "Favorites" ? (
+                ) : page === "Favorites" ? (
                   <Link to={`${page.toLowerCase()}`}>
                     <Typography textAlign="center">
-                      {page} {getLocal().length}
+                      {page} {getLocal() && getLocal().length}
                     </Typography>
                   </Link>
-                )
-                : (
+                ) : (
                   <Link to={`${page.toLowerCase()}`}>
-                    <Typography textAlign="center">
-                      {page}
-                    </Typography>
+                    <Typography textAlign="center">{page}</Typography>
                   </Link>
                 )}
               </div>
