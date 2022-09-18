@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import countryService from "../../services/countries";
+import { getLocal } from "../../services/local";
 
 export const countriesSlice = createSlice({
   name: "countries",
@@ -10,7 +11,15 @@ export const countriesSlice = createSlice({
   },
   reducers: {
     getCountries: (state, action) => {
-      state.countries = action.payload;
+      const newList = action.payload.map((country) => {
+        const selectedCountry = getLocal().find(
+          (visitedCountry) => visitedCountry.name.common === country.name.common
+        );
+        return selectedCountry !== undefined
+          ? { ...country, isChecked: true}
+          : { ...country, isChecked: false };
+      });
+      state.countries = newList;
     },
 
     isLoading: (state, action) => {
