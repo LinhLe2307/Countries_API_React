@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
+import { getLocal, setLocal } from "../services/local";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -27,7 +28,7 @@ const numberFormatter = (num) => {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CountryCard = ({ country, countries }) => {
-  const { languages, name, currencies, flags, isChecked, capital, population } =
+  const { languages, name, currencies, flags, capital, isChecked, population } =
     country;
 
   const urlName = name.common.replaceAll(" ", "-");
@@ -35,13 +36,17 @@ const CountryCard = ({ country, countries }) => {
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
-    dispatch(addFavorites(favorite));
+    if (getLocal()) {
+      dispatch(addFavorites(favorite));
+    } else {
+      setLocal([{ ...favorite, isChecked: true }]);
+    }
     setDeleteButton((prev) => !prev);
   };
 
   const handleDelete = (favorite) => {
     dispatch(removeFavorite(favorite));
-    setDeleteButton((prev) => !prev)
+    setDeleteButton((prev) => !prev);
   };
 
   return (

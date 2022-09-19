@@ -16,10 +16,7 @@ export const cartSlice = createSlice({
         ) === undefined
       ) {
         state.fav.push(visitedCountry);
-
-        getLocal()
-          ? setLocal(getLocal().concat(visitedCountry))
-          : setLocal(state.fav);
+        setLocal(getLocal().concat(visitedCountry));
       }
     },
 

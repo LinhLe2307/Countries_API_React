@@ -8,11 +8,13 @@ import {
   getCountries,
 } from "../features/countries/countriesSlice";
 import classes from "./modules/Countries.module.css";
+import { getLocal } from "../services/local";
 
 const Countries = () => {
   const countriesList = useSelector((state) => state.countries.countries);
   const isLoading = useSelector((state) => state.countries.isLoading);
   const searchInput = useSelector((state) => state.countries.search);
+  // const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
 
   useEffect(() => {
