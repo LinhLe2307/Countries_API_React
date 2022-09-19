@@ -16,6 +16,7 @@ const Countries = () => {
   const searchInput = useSelector((state) => state.countries.search);
   // const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
+  // const isChecked = true;
 
   useEffect(() => {
     dispatch(initializeCountries());
@@ -32,9 +33,9 @@ const Countries = () => {
           .filter((c) =>
             c.name.common.toLowerCase().includes(searchInput.toLowerCase())
           )
-          .map((country, i) => (
-            <CountryCard country={country} key={i} />
-          ))}
+          .map((country, i) => {
+            return <CountryCard country={country} key={i} />;
+          })}
       </div>
     </div>
   );

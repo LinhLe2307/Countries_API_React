@@ -5,9 +5,11 @@ import {
   CardContent,
   CardMedia,
   Checkbox,
+  Fab,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
@@ -95,12 +97,14 @@ const CountryCard = ({ country, countries }) => {
       </CardContent>
 
       {!deleteButton ? (
-        <Checkbox
-          {...label}
-          onChange={() => {
+        <Fab
+          aria-label="like"
+          onClick={() => {
             handleFavorites(country);
           }}
-        />
+        >
+          <FavoriteIcon />
+        </Fab>
       ) : (
         <Button onClick={() => handleDelete(country)}>Delete</Button>
       )}

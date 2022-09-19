@@ -8,15 +8,15 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addFavorites: (state, action) => {
-      const visitedCountry = { ...action.payload, isChecked: true };
+      // const visitedCountry = { ...action.payload, isChecked: true };
       if (
         getLocal().find(
           (country) =>
-            country.name.common.indexOf(visitedCountry.name.common) !== -1
+            country.name.common.indexOf(action.payload.name.common) !== -1
         ) === undefined
       ) {
-        state.fav.push(visitedCountry);
-        setLocal(getLocal().concat(visitedCountry));
+        state.fav.push(action.payload);
+        setLocal(getLocal().concat(action.payload));
       }
     },
 
