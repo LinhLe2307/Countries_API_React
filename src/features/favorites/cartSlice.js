@@ -7,16 +7,19 @@ export const cartSlice = createSlice({
     fav: [],
   },
   reducers: {
+    getFavorites: (state, action) => {
+      state.fav = action.payload;
+    },
+
     addFavorites: (state, action) => {
-      const visitedCountry = { ...action.payload, isChecked: true };
       if (
-        getLocal().find(
+        state.fav.find(
           (country) =>
-            country.name.common.indexOf(visitedCountry.name.common) !== -1
+            country.name.common.indexOf(action.payload.name.common) !== -1
         ) === undefined
       ) {
         state.fav.push(action.payload);
-        setLocal(getLocal().concat(visitedCountry));
+        setLocal(getLocal().concat(action.payload));
       }
     },
 
@@ -37,5 +40,15 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addFavorites, removeFavorite } = cartSlice.actions;
+export const initializeFavorites = () => {
+  return async (dispatch) => {
+    const localFavList = getLocal();
+    if (localFavList) {
+      return dispatch(getFavorites(localFavList));
+    }
+    return dispatch(getFavorites([]));
+  };
+};
+
+export const { getFavorites, addFavorites, removeFavorite } = cartSlice.actions;
 export default cartSlice.reducer;

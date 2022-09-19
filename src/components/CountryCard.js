@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
 import { getLocal, setLocal } from "../services/local";
@@ -30,25 +30,30 @@ const numberFormatter = (num) => {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CountryCard = ({ country, countries }) => {
-  const { languages, name, currencies, flags, capital, isChecked, population } =
-    country;
+  const { languages, name, currencies, flags, capital, population } = country;
 
   const urlName = name.common.replaceAll(" ", "-");
-  const [deleteButton, setDeleteButton] = useState(isChecked);
+  const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
     if (getLocal()) {
       dispatch(addFavorites(favorite));
     } else {
-      setLocal([{ ...favorite, isChecked: true }]);
+      setLocal([favorite]);
     }
-    setDeleteButton((prev) => !prev);
   };
 
   const handleDelete = (favorite) => {
     dispatch(removeFavorite(favorite));
-    setDeleteButton((prev) => !prev);
+  };
+
+  const isFav = () => {
+    return favorites.find(
+      (favorite) => favorite.name.common === name.common
+    ) !== undefined
+      ? true
+      : false;
   };
 
   return (
@@ -96,7 +101,7 @@ const CountryCard = ({ country, countries }) => {
         </Typography>
       </CardContent>
 
-      {!deleteButton ? (
+      {!isFav() ? (
         <Fab
           aria-label="like"
           onClick={() => {

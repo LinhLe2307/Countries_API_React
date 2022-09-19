@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { initializeFavorites } from "../features/favorites/cartSlice";
 import { getLocal } from "../services/local";
 import CountryCard from "./CountryCard";
 import classes from "./modules/Countries.module.css";
 
 const Favorites = () => {
-  const [favCountries, setFavCountries] = useState([]);
 
   const searchInput = useSelector((state) => state.countries.search);
   const favorites = useSelector((state) => state.favorites.fav);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setFavCountries(getLocal);
-  }, [favorites]);
+    dispatch(initializeFavorites());
+  }, [dispatch]);
+
   return (
     <div className={`${classes.container}`}>
       <div className={`${classes.countries}`}>
-        {favCountries
+        {favorites
           .filter((c) =>
             c.name.common.toLowerCase().includes(searchInput.toLowerCase())
           )
