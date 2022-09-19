@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Avatar,
   Button,
@@ -8,7 +9,6 @@ import {
   Fab,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
@@ -57,7 +57,7 @@ const CountryCard = ({ country, countries }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, position: "relative" }}>
+    <Card sx={{ maxWidth: 345}}>
       <Link
         to={`${urlName}`}
         state={{
@@ -68,7 +68,6 @@ const CountryCard = ({ country, countries }) => {
         <CardMedia
           component="img"
           height="194"
-          // image="https://images.unsplash.com/photo-1661147338478-03c1893fd330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
           image={`${flags.png}`}
           alt={`${name.common}`}
         />

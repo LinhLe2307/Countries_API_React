@@ -11,15 +11,6 @@ export const countriesSlice = createSlice({
   },
   reducers: {
     getCountries: (state, action) => {
-      // const newList = action.payload.map((country) => {
-      //   const selectedCountry = getLocal().find(
-      //     (visitedCountry) => visitedCountry.name.common === country.name.common
-      //   );
-      //   return selectedCountry !== undefined
-      //     ? { ...country, isChecked: true }
-      //     : { ...country, isChecked: false };
-      // });
-      // state.countries = newList;
       state.countries = action.payload;
     },
 

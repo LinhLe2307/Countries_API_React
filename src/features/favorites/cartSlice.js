@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
       const removeCountry = action.payload;
       state.fav = state.fav.filter(
         (country) =>
-          country.name.common.indexOf(removeCountry.name.common) !== -1
+          country.name.common.indexOf(removeCountry.name.common) === -1
       );
 
       setLocal(
@@ -43,10 +43,7 @@ export const cartSlice = createSlice({
 export const initializeFavorites = () => {
   return async (dispatch) => {
     const localFavList = getLocal();
-    if (localFavList) {
-      return dispatch(getFavorites(localFavList));
-    }
-    return dispatch(getFavorites([]));
+    dispatch(getFavorites(localFavList));
   };
 };
 
