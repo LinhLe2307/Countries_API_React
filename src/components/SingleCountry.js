@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -8,8 +8,8 @@ import classes from "./modules/SingleCountry.module.css";
 
 const SingleCountry = () => {
   let location = useLocation();
-  const [weather, setWeather] = useState([]);
-  const [borderCountries, setBorderCountries] = useState();
+  const [weathers, setWeathers] = useState([]);
+  const [borderCountries, setBorderCountries] = useState([]);
   const navigate = useNavigate();
   const countries = useSelector((state) => state.countries.countries);
 
@@ -25,13 +25,13 @@ const SingleCountry = () => {
       );
     });
     Promise.all(capitalList)
-      .then((res) => setWeather(res))
-      .catch((err) =>
+      .then((res) => setWeathers(res))
+      .catch((error) =>
         axios
           .get(
             `https://api.openweathermap.org/data/2.5/weather?q=${name.common}&appid=${api}`
           )
-          .then((res) => setWeather([res]))
+          .then((res) => setWeathers([res]))
           .catch((err) => console.log(err))
       );
 
@@ -43,7 +43,7 @@ const SingleCountry = () => {
 
       setBorderCountries(newBorderList);
     }
-  }, [location]);
+  }, [location, borders, capital, countries, name.common]);
 
   return (
     <div className={classes["single-card"]}>
@@ -80,15 +80,6 @@ const SingleCountry = () => {
                   );
                   return (
                     <>
-                      {/* <Link
-                      to={`/countries/${newBorderName}`}
-                      state={{
-                        country: borderCountry,
-                        countries: location.state.countries,
-                      }}
-                    >
-                      {borderCountry.name.common}
-                    </Link> */}
                       <Button
                         key={i}
                         onClick={() =>
@@ -110,15 +101,15 @@ const SingleCountry = () => {
         </div>
         {/* ----------------WEATHER ------------------ */}
         <h2>Weather</h2>
-        {weather.map((weather, i) => (
+        {weathers.map((weather, i) => (
           <div key={i}>
             <h3>
               {weather.data.name === name.common ? "Country" : "Capital"} :{" "}
               {weather.data.name}
             </h3>
             <div>
-              {weather.data.weather.map((obj, i) => (
-                <li key={i}>
+              {weather.data.weather.map((obj, index) => (
+                <li key={index}>
                   {obj.main}
                   {obj.description}
                   <img

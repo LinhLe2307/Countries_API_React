@@ -1,11 +1,9 @@
 import React from "react";
 import {
-  Avatar,
   Button,
   Card,
   CardContent,
   CardMedia,
-  Checkbox,
   Fab,
   Typography,
 } from "@mui/material";
@@ -30,7 +28,7 @@ const numberFormatter = (num) => {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CountryCard = ({ country, countries }) => {
-  const { languages, name, currencies, flags, capital, population } = country;
+  const { languages, name, currencies, flags, population } = country;
 
   const urlName = name.common.replaceAll(" ", "-");
   const favorites = useSelector((state) => state.favorites.fav);

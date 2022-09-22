@@ -1,9 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeFavorites } from "../features/favorites/cartSlice";
-import { getLocal } from "../services/local";
 import CountryCard from "./CountryCard";
 
 const Favorites = () => {
