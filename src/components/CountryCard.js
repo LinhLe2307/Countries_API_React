@@ -1,16 +1,17 @@
+import React from "react";
 import {
-  Avatar,
   Button,
   Card,
   CardContent,
   CardMedia,
-  Checkbox,
+  Fab,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useDispatch, useSelector } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
+import { getLocal, setLocal } from "../services/local";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -27,21 +28,34 @@ const numberFormatter = (num) => {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CountryCard = ({ country, countries }) => {
-  const { languages, name, currencies, flags, capital, population } = country;
+  const { languages, name, currencies, flags, population } = country;
+
   const urlName = name.common.replaceAll(" ", "-");
+  const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
-    console.log(favorite);
-    dispatch(addFavorites(favorite));
+    if (getLocal()) {
+      dispatch(addFavorites(favorite));
+    } else {
+      setLocal([favorite]);
+    }
   };
 
   const handleDelete = (favorite) => {
     dispatch(removeFavorite(favorite));
   };
 
+  const isFav = () => {
+    return favorites.find(
+      (favorite) => favorite.name.common === name.common
+    ) !== undefined
+      ? true
+      : false;
+  };
+
   return (
-    <Card sx={{ maxWidth: 345, position: "relative" }}>
+    <Card sx={{ maxWidth: 345}}>
       <Link
         to={`${urlName}`}
         state={{
@@ -52,7 +66,6 @@ const CountryCard = ({ country, countries }) => {
         <CardMedia
           component="img"
           height="194"
-          // image="https://images.unsplash.com/photo-1661147338478-03c1893fd330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
           image={`${flags.png}`}
           alt={`${name.common}`}
         />
@@ -84,8 +97,19 @@ const CountryCard = ({ country, countries }) => {
           {numberFormatter(population)}
         </Typography>
       </CardContent>
-      <Checkbox {...label} onChange={() => handleFavorites(country)} />
-      <Button onClick={() => handleDelete(country)}>Delete</Button>
+
+      {!isFav() ? (
+        <Fab
+          aria-label="like"
+          onClick={() => {
+            handleFavorites(country);
+          }}
+        >
+          <FavoriteIcon />
+        </Fab>
+      ) : (
+        <Button onClick={() => handleDelete(country)}>Delete</Button>
+      )}
     </Card>
   );
 };

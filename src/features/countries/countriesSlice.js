@@ -19,7 +19,7 @@ export const countriesSlice = createSlice({
 
     search: (state, action) => {
       state.search = action.payload;
-    }
+    },
   },
 });
 

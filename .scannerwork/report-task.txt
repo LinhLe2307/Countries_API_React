@@ -1,0 +1,6 @@
+projectKey=countries_api
+serverUrl=http://localhost:8889
+serverVersion=8.7.1.42226
+dashboardUrl=http://localhost:8889/dashboard?id=countries_api
+ceTaskId=AYNcDYRoGThi1LfP82EU
+ceTaskUrl=http://localhost:8889/api/ce/task?id=AYNcDYRoGThi1LfP82EU
