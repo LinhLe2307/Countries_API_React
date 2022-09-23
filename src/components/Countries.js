@@ -9,12 +9,16 @@ import { CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import CountryCard from "./CountryCard";
 
-const Countries = () => {
+const Countries = ({ typeName }) => {
   const countriesList = useSelector((state) => state.countries.countries);
   const isLoading = useSelector((state) => state.countries.isLoading);
   const searchInput = useSelector((state) => state.countries.search);
   const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
+
+  const checkContentType = () => {
+    return typeName === "countries" ? countriesList : favorites;
+  };
 
   useEffect(() => {
     dispatch(initializeCountries());
@@ -40,7 +44,7 @@ const Countries = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        {countriesList
+        {checkContentType()
           .filter((c) =>
             c.name.common.toLowerCase().includes(searchInput.toLowerCase())
           )

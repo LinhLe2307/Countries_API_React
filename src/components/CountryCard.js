@@ -53,7 +53,7 @@ const CountryCard = ({ country, favorites }) => {
     <Card
       sx={{
         maxWidth: 450,
-        height: 500,
+        minHeight: 550,
         margin: "0 auto",
         backgroundColor: "linear-gradient(145deg, #e2e8ec, #ffffff)",
         position: "relative",
