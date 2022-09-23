@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
         ) === undefined
       ) {
         state.fav.push(action.payload);
-        setLocal(getLocal().concat(action.payload));
+        setLocal(state.fav);
       }
     },
 
@@ -30,12 +30,7 @@ export const cartSlice = createSlice({
           country.name.common.indexOf(removeCountry.name.common) === -1
       );
 
-      setLocal(
-        getLocal().filter(
-          (country) =>
-            country.name.common.indexOf(removeCountry.name.common) === -1
-        )
-      );
+      setLocal(state.fav);
     },
   },
 });
@@ -43,7 +38,11 @@ export const cartSlice = createSlice({
 export const initializeFavorites = () => {
   return async (dispatch) => {
     const localFavList = getLocal();
-    dispatch(getFavorites(localFavList));
+    if(localFavList) {
+      dispatch(getFavorites(localFavList));
+    } else {
+      dispatch(getFavorites([]));
+    }
   };
 };
 

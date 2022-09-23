@@ -35,11 +35,11 @@ const CountryCard = ({ country, countries }) => {
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
-    if (getLocal()) {
+    // if (getLocal()) {
       dispatch(addFavorites(favorite));
-    } else {
-      setLocal([favorite]);
-    }
+    // } else {
+    //   setLocal([favorite]);
+    // }
   };
 
   const handleDelete = (favorite) => {
@@ -47,7 +47,7 @@ const CountryCard = ({ country, countries }) => {
   };
 
   const isFav = () => {
-    return favorites.find(
+    return favorites && favorites.find(
       (favorite) => favorite.name.common === name.common
     ) !== undefined
       ? true
@@ -101,9 +101,9 @@ const CountryCard = ({ country, countries }) => {
       {!isFav() ? (
         <Fab
           aria-label="like"
-          onClick={() => {
-            handleFavorites(country);
-          }}
+          onClick={() => 
+            handleFavorites(country)
+          }
         >
           <FavoriteIcon />
         </Fab>
