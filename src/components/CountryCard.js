@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -8,10 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import { Link } from "react-router-dom";
-import { getLocal, setLocal } from "../services/local";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -27,19 +26,14 @@ const numberFormatter = (num) => {
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const CountryCard = ({ country, countries }) => {
+const CountryCard = ({ country, countries, favorites }) => {
   const { languages, name, currencies, flags, population } = country;
 
   const urlName = name.common.replaceAll(" ", "-");
-  const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
 
   const handleFavorites = (favorite) => {
-    // if (getLocal()) {
-      dispatch(addFavorites(favorite));
-    // } else {
-    //   setLocal([favorite]);
-    // }
+    dispatch(addFavorites(favorite));
   };
 
   const handleDelete = (favorite) => {
@@ -47,15 +41,15 @@ const CountryCard = ({ country, countries }) => {
   };
 
   const isFav = () => {
-    return favorites && favorites.find(
-      (favorite) => favorite.name.common === name.common
-    ) !== undefined
+    return favorites &&
+      favorites.find((favorite) => favorite.name.common === name.common) !==
+        undefined
       ? true
       : false;
   };
 
   return (
-    <Card sx={{ maxWidth: 345}}>
+    <Card sx={{ maxWidth: 345 }}>
       <Link
         to={`${urlName}`}
         state={{
@@ -99,12 +93,7 @@ const CountryCard = ({ country, countries }) => {
       </CardContent>
 
       {!isFav() ? (
-        <Fab
-          aria-label="like"
-          onClick={() => 
-            handleFavorites(country)
-          }
-        >
+        <Fab aria-label="like" onClick={() => handleFavorites(country)}>
           <FavoriteIcon />
         </Fab>
       ) : (

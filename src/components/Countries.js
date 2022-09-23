@@ -12,6 +12,7 @@ const Countries = () => {
   const countriesList = useSelector((state) => state.countries.countries);
   const isLoading = useSelector((state) => state.countries.isLoading);
   const searchInput = useSelector((state) => state.countries.search);
+  const favorites = useSelector((state) => state.favorites.fav);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Countries = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <CountryCard country={country} />
+                <CountryCard country={country} favorites={favorites} />
               </Grid>
             );
           })}

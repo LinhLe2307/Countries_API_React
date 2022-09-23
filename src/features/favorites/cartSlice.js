@@ -37,8 +37,8 @@ export const cartSlice = createSlice({
 
 export const initializeFavorites = () => {
   return async (dispatch) => {
-    const localFavList = getLocal();
-    if(localFavList) {
+    const localFavList = await getLocal();
+    if (localFavList) {
       dispatch(getFavorites(localFavList));
     } else {
       dispatch(getFavorites([]));
