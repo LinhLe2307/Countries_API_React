@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import Card from "@mui/material/Card";
@@ -75,59 +75,58 @@ const SingleCountry = () => {
           style={{ margin: "2rem 0" }}
         />
 
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
+        <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
           {/* ----------------LANGUAGES ------------------ */}
           <Grid item xs={2} sm={4} md={4}>
-            <ul>
-              <h3>Languages</h3>
-              {languages &&
-                Object.values(languages).map((language, i) => (
-                  <li key={i}>{language}</li>
-                ))}
-            </ul>
+            <h3 className="center">Languages</h3>
+            {languages &&
+              Object.values(languages).map((language, i) => (
+                <p key={i} className="center">
+                  {language}
+                </p>
+              ))}
+            {/* </ul> */}
           </Grid>
 
           {/* ----------------CURRENCIES ------------------ */}
           <Grid item xs={2} sm={4} md={4}>
             <ul>
-              <h3>Currencies</h3>
+              <h3 className="center">Currencies</h3>
               {currencies &&
                 Object.values(currencies).map((currency, i) => (
-                  <li key={i}>{`${currency.name}`}</li>
+                  <p key={i} className="center">{`${currency.name}`}</p>
                 ))}
             </ul>
           </Grid>
 
           <Grid item xs={2} sm={4} md={4}>
             <ul>
-              <h3>Borders</h3>
-              {borderCountries.length > 0
-                ? borderCountries.map((borderCountry, i) => {
-                    const newBorderName = borderCountry.name.common.replaceAll(
-                      " ",
-                      "-"
-                    );
-                    return (
-                      <Button
-                        key={i}
-                        onClick={() =>
-                          navigate(`/countries/${newBorderName}`, {
-                            state: {
-                              country: borderCountry,
-                              countries: location.state.countries,
-                            },
-                          })
-                        }
-                      >
-                        {borderCountry.name.common}
-                      </Button>
-                    );
-                  })
-                : "No borders"}
+              <h3 className="center">Borders</h3>
+              {borderCountries.length > 0 ? (
+                borderCountries.map((borderCountry, i) => {
+                  const newBorderName = borderCountry.name.common.replaceAll(
+                    " ",
+                    "-"
+                  );
+                  return (
+                    <Button
+                      key={i}
+                      onClick={() =>
+                        navigate(`/countries/${newBorderName}`, {
+                          state: {
+                            country: borderCountry,
+                            countries: location.state.countries,
+                          },
+                        })
+                      }
+                    >
+                      {borderCountry.name.common}
+                    </Button>
+                  );
+                })
+              ) : (
+                <p className="center">No borders</p>
+              )}
             </ul>
           </Grid>
         </Grid>
@@ -153,7 +152,9 @@ const SingleCountry = () => {
           </div>
         ))}
 
-        <Button onClick={() => navigate("/")}>Back to countries</Button>
+        <Button onClick={() => navigate("/countries")}>
+          Back to countries
+        </Button>
       </Card>
     </Container>
   );

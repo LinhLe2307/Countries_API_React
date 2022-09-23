@@ -54,7 +54,6 @@ const CountryCard = ({ country, favorites }) => {
         to={`${urlName}`}
         state={{
           country: country,
-
         }}
       >
         <CardMedia
@@ -69,9 +68,11 @@ const CountryCard = ({ country, favorites }) => {
         color="text.secondary"
         sx={{ display: "grid", gridTemplateColumn: "repeat(3, 1fr)" }}
       >
-        <Typography variant="h4">{name.common}</Typography>
+        <Typography variant="h4" sx={{ fontFamily: '"Raleway", sans-serif' }}>
+          {name.common}
+        </Typography>
 
-        <Typography>
+        <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
           LANGUAGES
           {languages &&
             Object.values(languages).map((language, i) => (
@@ -79,14 +80,14 @@ const CountryCard = ({ country, favorites }) => {
             ))}
         </Typography>
 
-        <Typography>
+        <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
           CURRENCIES
           {currencies &&
             Object.values(currencies).map((currency, i) => (
               <li key={i}>{`${currency.name}`}</li>
             ))}
         </Typography>
-        <Typography>
+        <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
           POPULATION
           {numberFormatter(population)}
         </Typography>
