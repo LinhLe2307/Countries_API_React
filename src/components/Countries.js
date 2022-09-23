@@ -4,6 +4,7 @@ import { initializeCountries } from "../features/countries/countriesSlice";
 import { initializeFavorites } from "../features/favorites/cartSlice";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import { CircularProgress } from "@mui/material";
 
 import Button from "@mui/material/Button";
 import CountryCard from "./CountryCard";
@@ -21,7 +22,13 @@ const Countries = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    <p>Is loading</p>;
+    return (
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

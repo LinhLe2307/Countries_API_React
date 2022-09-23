@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,6 +20,8 @@ const pages = ["HomePage", "Countries", "Favorites"];
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
+  const favorites = useSelector((state) => state.favorites.fav);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -32,6 +35,14 @@ const Header = () => {
       return (
         <Link to="/">
           <Typography textAlign="center">Homepage</Typography>
+        </Link>
+      );
+    } else if (page === "Favorites") {
+      return (
+        <Link to={`${page.toLowerCase()}`}>
+          <Typography textAlign="center">
+            {page} {favorites.length}
+          </Typography>
         </Link>
       );
     } else {
@@ -95,7 +106,9 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}></MenuItem>
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  {checkHeader(page)}
+                </MenuItem>
               ))}
             </Menu>
           </Box>

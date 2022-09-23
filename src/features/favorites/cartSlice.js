@@ -4,7 +4,7 @@ import { setLocal, getLocal } from "../../services/local";
 export const cartSlice = createSlice({
   name: "favorites",
   initialState: {
-    fav: [],
+    fav: []
   },
   reducers: {
     getFavorites: (state, action) => {

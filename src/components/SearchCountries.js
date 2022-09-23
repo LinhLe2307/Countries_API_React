@@ -55,7 +55,6 @@ const SearchCountries = () => {
 
 
   const handleSearch = (e) => {
-    // console.log(e.target.value)
     dispatch(search(e.target.value));
   };
 
