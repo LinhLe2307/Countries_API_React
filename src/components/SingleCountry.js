@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
+import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 
@@ -16,6 +17,41 @@ const SingleCountry = () => {
 
   const { languages, name, currencies, flags, capital, borders } =
     location.state.country;
+
+  const bordersList = (borderCountries) => {
+    if (borderCountries.length > 0) {
+      return (
+        <div className="center">
+          {borderCountries.map((borderCountry, i) => {
+            const newBorderName = borderCountry.name.common.replaceAll(
+              " ",
+              "-"
+            );
+            return (
+              <div>
+                <Link
+                  key={i}
+                  sx={{ fontFamily: "inherit" }}
+                  underline="hover"
+                  onClick={() =>
+                    navigate(`/countries/${newBorderName}`, {
+                      state: {
+                        country: borderCountry,
+                      },
+                    })
+                  }
+                >
+                  {borderCountry.name.common}
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      );
+    } else {
+      return <p className="center">No borders</p>;
+    }
+  };
 
   useEffect(() => {
     let api = process.env.REACT_APP_API_KEY;
@@ -72,10 +108,14 @@ const SingleCountry = () => {
         <img
           src={flags.png}
           alt={`${name.common}`}
-          style={{ margin: "2rem 0" }}
+          style={{ margin: "1.5rem 0" }}
         />
 
-        <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid
+          container
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          sx={{ marginBottom: "1.5rem" }}
+        >
           {/* ----------------LANGUAGES ------------------ */}
           <Grid item xs={2} sm={4} md={4}>
             <h3 className="center">Languages</h3>
@@ -98,51 +138,25 @@ const SingleCountry = () => {
                 ))}
             </ul>
           </Grid>
-
+          {/* ----------------BORDERS ------------------ */}
           <Grid item xs={2} sm={4} md={4}>
-            <ul>
-              <h3 className="center">Borders</h3>
-              {borderCountries.length > 0 ? (
-                borderCountries.map((borderCountry, i) => {
-                  const newBorderName = borderCountry.name.common.replaceAll(
-                    " ",
-                    "-"
-                  );
-                  return (
-                    <Button
-                      key={i}
-                      onClick={() =>
-                        navigate(`/countries/${newBorderName}`, {
-                          state: {
-                            country: borderCountry,
-                            countries: location.state.countries,
-                          },
-                        })
-                      }
-                    >
-                      {borderCountry.name.common}
-                    </Button>
-                  );
-                })
-              ) : (
-                <p className="center">No borders</p>
-              )}
-            </ul>
+            <h3 className="center">Borders</h3>
+            {bordersList(borderCountries)}
           </Grid>
         </Grid>
+
         {/* ----------------WEATHER ------------------ */}
         <h2>Weather</h2>
         {weathers.map((weather, i) => (
           <div key={i}>
-            <h3>
+            <h3 className="center">
               {weather.data.name === name.common ? "Country" : "Capital"} :{" "}
               {weather.data.name}
             </h3>
             <div>
               {weather.data.weather.map((obj, index) => (
-                <li key={index}>
+                <li key={index} className="flex-box">
                   {obj.main}
-                  {obj.description}
                   <img
                     src={`https://openweathermap.org/img/wn/${obj.icon}@2x.png`}
                   />
@@ -152,7 +166,11 @@ const SingleCountry = () => {
           </div>
         ))}
 
-        <Button onClick={() => navigate("/countries")}>
+        <Button
+          onClick={() => navigate("/countries")}
+          sx={{ fontFamily: "inherit" }}
+          variant="contained"
+        >
           Back to countries
         </Button>
       </Card>

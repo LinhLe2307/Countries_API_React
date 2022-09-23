@@ -18,3 +18,9 @@ main {
 .center {
   text-align: center;
 }
+
+.flex-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
