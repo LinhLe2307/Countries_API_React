@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Fab } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const SingleCountry = () => {
   let location = useLocation();
   const [weathers, setWeathers] = useState([]);
   const [borderCountries, setBorderCountries] = useState([]);
   const countries = useSelector((state) => state.countries.countries);
+  const favorites = useSelector((state) => state.favorites.fav);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { languages, name, currencies, flags, capital, borders } =
     location.state.country;
+
+  const isFav = () => {
+    return favorites &&
+      favorites.find((favorite) => favorite.name.common === name.common) !==
+        undefined
+      ? true
+      : false;
+  };
+
+  const handleFavorites = (favorite) => {
+    dispatch(addFavorites(favorite));
+  };
+
+  const handleDelete = (favorite) => {
+    dispatch(removeFavorite(favorite));
+  };
 
   const bordersList = (borderCountries) => {
     if (borderCountries.length > 0) {
@@ -165,6 +186,22 @@ const SingleCountry = () => {
             </div>
           </div>
         ))}
+        {!isFav() ? (
+          <Fab
+            aria-label="like"
+            onClick={() => handleFavorites(location.state.country)}
+            
+          >
+            <FavoriteIcon />
+          </Fab>
+        ) : (
+          <Button
+            onClick={() => handleDelete(location.state.country)}
+           
+          >
+            Delete
+          </Button>
+        )}
 
         <Button
           onClick={() => navigate("/countries")}

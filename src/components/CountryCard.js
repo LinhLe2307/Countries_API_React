@@ -6,6 +6,7 @@ import {
   CardContent,
   CardMedia,
   Fab,
+  Grid,
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -49,7 +50,15 @@ const CountryCard = ({ country, favorites }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, height: 500 }}>
+    <Card
+      sx={{
+        maxWidth: 450,
+        height: 500,
+        margin: "0 auto",
+        backgroundColor: "linear-gradient(145deg, #e2e8ec, #ffffff)",
+        position: "relative",
+      }}
+    >
       <Link
         to={`${urlName}`}
         state={{
@@ -61,6 +70,7 @@ const CountryCard = ({ country, favorites }) => {
           height="194"
           image={`${flags.png}`}
           alt={`${name.common}`}
+          sx={{ height: "15rem" }}
         />
       </Link>
       <CardContent
@@ -71,34 +81,47 @@ const CountryCard = ({ country, favorites }) => {
         <Typography variant="h4" sx={{ fontFamily: '"Raleway", sans-serif' }}>
           {name.common}
         </Typography>
+        <Grid container columns={{ xs: 4, sm: 8, md: 12 }} flexWrap="wrap">
+          <Grid item xs={2} sm={4} md={4}>
+            <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
+              LANGUAGES
+              {languages &&
+                Object.values(languages).map((language, i) => (
+                  <li key={i}>{language}</li>
+                ))}
+            </Typography>
+          </Grid>
 
-        <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-          LANGUAGES
-          {languages &&
-            Object.values(languages).map((language, i) => (
-              <li key={i}>{language}</li>
-            ))}
-        </Typography>
-
-        <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-          CURRENCIES
-          {currencies &&
-            Object.values(currencies).map((currency, i) => (
-              <li key={i}>{`${currency.name}`}</li>
-            ))}
-        </Typography>
-        <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-          POPULATION
-          {numberFormatter(population)}
-        </Typography>
+          <Grid item xs={2} sm={4} md={4}>
+            <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
+              CURRENCIES
+              {currencies &&
+                Object.values(currencies).map((currency, i) => (
+                  <li key={i}>{`${currency.name}`}</li>
+                ))}
+            </Typography>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
+              POPULATION
+            </Typography>
+            {numberFormatter(population)}
+          </Grid>
+        </Grid>
       </CardContent>
 
       {!isFav() ? (
-        <Fab aria-label="like" onClick={() => handleFavorites(country)}>
+        <Fab
+          aria-label="like"
+          onClick={() => handleFavorites(country)}
+          className="button"
+        >
           <FavoriteIcon />
         </Fab>
       ) : (
-        <Button onClick={() => handleDelete(country)}>Delete</Button>
+        <Button onClick={() => handleDelete(country)} className="button">
+          Delete
+        </Button>
       )}
     </Card>
   );

@@ -24,3 +24,8 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+.button {
+  position: absolute;
+  bottom: -40px;
+}

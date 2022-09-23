@@ -50,15 +50,11 @@ const Countries = () => {
                 item
                 xs={4}
                 sm={2}
-                md={3}
+                md={4}
                 key={i}
-                justifyContent="center"
-                alignItems="center"
+                sx={{ textAlign: "center" }}
               >
-                <CountryCard
-                  country={country}
-                  favorites={favorites}
-                />
+                <CountryCard country={country} favorites={favorites} />
               </Grid>
             );
           })}
