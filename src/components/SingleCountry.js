@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
-import classes from "./modules/SingleCountry.module.css";
+import Card from "@mui/material/Card";
+import Container from "@mui/material/Container";
 
 const SingleCountry = () => {
   let location = useLocation();
   const [weathers, setWeathers] = useState([]);
   const [borderCountries, setBorderCountries] = useState([]);
-  const navigate = useNavigate();
   const countries = useSelector((state) => state.countries.countries);
+  const navigate = useNavigate();
 
   const { languages, name, currencies, flags, capital, borders } =
     location.state.country;
@@ -40,46 +41,77 @@ const SingleCountry = () => {
       const newBorderList = countries.filter((country) => {
         return borders.indexOf(country.cca3) !== -1;
       });
-
       setBorderCountries(newBorderList);
     }
   }, [location, borders, capital, countries, name.common]);
 
   return (
-    <div className={classes["single-card"]}>
-      <div className={classes["card"]}>
+    <Container
+      maxWidth="100vw"
+      sx={{
+        backgroundImage:
+          'url("https://images.unsplash.com/photo-1589519160732-57fc498494f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card
+        sx={{
+          width: 600,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          padding: "1rem",
+        }}
+      >
         <h1>{name.common}</h1>
-        <img src={flags.png} alt={`${name.common}`} />
 
-        <div className={classes.context}>
+        <img
+          src={flags.png}
+          alt={`${name.common}`}
+          style={{ margin: "2rem 0" }}
+        />
+
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
           {/* ----------------LANGUAGES ------------------ */}
-          <ul>
-            <h3>Languages</h3>
-            {languages &&
-              Object.values(languages).map((language, i) => (
-                <li key={i}>{language}</li>
-              ))}
-          </ul>
+          <Grid item xs={2} sm={4} md={4}>
+            <ul>
+              <h3>Languages</h3>
+              {languages &&
+                Object.values(languages).map((language, i) => (
+                  <li key={i}>{language}</li>
+                ))}
+            </ul>
+          </Grid>
 
           {/* ----------------CURRENCIES ------------------ */}
-          <ul>
-            <h3>Currencies</h3>
-            {currencies &&
-              Object.values(currencies).map((currency, i) => (
-                <li key={i}>{`${currency.name}`}</li>
-              ))}
-          </ul>
+          <Grid item xs={2} sm={4} md={4}>
+            <ul>
+              <h3>Currencies</h3>
+              {currencies &&
+                Object.values(currencies).map((currency, i) => (
+                  <li key={i}>{`${currency.name}`}</li>
+                ))}
+            </ul>
+          </Grid>
 
-          <ul>
-            <h3>Borders</h3>
-            {borderCountries
-              ? borderCountries.map((borderCountry, i) => {
-                  const newBorderName = borderCountry.name.common.replaceAll(
-                    " ",
-                    "-"
-                  );
-                  return (
-                    <>
+          <Grid item xs={2} sm={4} md={4}>
+            <ul>
+              <h3>Borders</h3>
+              {borderCountries.length > 0
+                ? borderCountries.map((borderCountry, i) => {
+                    const newBorderName = borderCountry.name.common.replaceAll(
+                      " ",
+                      "-"
+                    );
+                    return (
                       <Button
                         key={i}
                         onClick={() =>
@@ -93,12 +125,12 @@ const SingleCountry = () => {
                       >
                         {borderCountry.name.common}
                       </Button>
-                    </>
-                  );
-                })
-              : "No borders"}
-          </ul>
-        </div>
+                    );
+                  })
+                : "No borders"}
+            </ul>
+          </Grid>
+        </Grid>
         {/* ----------------WEATHER ------------------ */}
         <h2>Weather</h2>
         {weathers.map((weather, i) => (
@@ -122,8 +154,8 @@ const SingleCountry = () => {
         ))}
 
         <Button onClick={() => navigate("/")}>Back to countries</Button>
-      </div>
-    </div>
+      </Card>
+    </Container>
   );
 };
 

@@ -55,7 +55,10 @@ const Countries = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <CountryCard country={country} favorites={favorites} />
+                <CountryCard
+                  country={country}
+                  favorites={favorites}
+                />
               </Grid>
             );
           })}

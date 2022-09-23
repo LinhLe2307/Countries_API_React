@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -10,7 +11,6 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
-import { Link } from "react-router-dom";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -26,7 +26,7 @@ const numberFormatter = (num) => {
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const CountryCard = ({ country, countries, favorites }) => {
+const CountryCard = ({ country, favorites }) => {
   const { languages, name, currencies, flags, population } = country;
 
   const urlName = name.common.replaceAll(" ", "-");
@@ -49,12 +49,12 @@ const CountryCard = ({ country, countries, favorites }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, height: 500 }}>
       <Link
         to={`${urlName}`}
         state={{
           country: country,
-          countries: countries,
+
         }}
       >
         <CardMedia
