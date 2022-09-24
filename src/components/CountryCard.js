@@ -53,10 +53,9 @@ const CountryCard = ({ country, favorites }) => {
     <Card
       sx={{
         maxWidth: 450,
-        minHeight: 550,
+        minHeight: 450,
         margin: "0 auto",
         backgroundColor: "linear-gradient(145deg, #e2e8ec, #ffffff)",
-        position: "relative",
       }}
     >
       <Link
@@ -114,12 +113,12 @@ const CountryCard = ({ country, favorites }) => {
         <Fab
           aria-label="like"
           onClick={() => handleFavorites(country)}
-          className="button"
+          sx={{margin:"1rem"}}
         >
           <FavoriteIcon />
         </Fab>
       ) : (
-        <Button onClick={() => handleDelete(country)} className="button">
+        <Button onClick={() => handleDelete(country)} sx={{margin:"1rem"}} >
           Delete
         </Button>
       )}

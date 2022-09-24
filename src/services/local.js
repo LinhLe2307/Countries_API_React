@@ -9,4 +9,4 @@ const setLocal = (favList) => {
 
 const getLocal = () => JSON.parse(localStorage.getItem("countries"));
 
-export {setLocal, getLocal}
+export default {setLocal, getLocal}

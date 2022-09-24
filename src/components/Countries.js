@@ -23,6 +23,7 @@ const Countries = ({ typeName }) => {
   useEffect(() => {
     dispatch(initializeCountries());
     dispatch(initializeFavorites());
+  
   }, [dispatch]);
 
   if (isLoading) {

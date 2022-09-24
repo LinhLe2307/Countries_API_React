@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setLocal, getLocal } from "../../services/local";
+import favoritesService from "../../services/local";
 
 export const cartSlice = createSlice({
   name: "favorites",
@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
         ) === undefined
       ) {
         state.fav.push(action.payload);
-        setLocal(state.fav);
+        favoritesService.setLocal(state.fav);
       }
     },
 
@@ -30,14 +30,14 @@ export const cartSlice = createSlice({
           country.name.common.indexOf(removeCountry.name.common) === -1
       );
 
-      setLocal(state.fav);
+      favoritesService.setLocal(state.fav);
     },
   },
 });
 
 export const initializeFavorites = () => {
   return async (dispatch) => {
-    const localFavList = await getLocal();
+    const localFavList = await favoritesService.getLocal();
     if (localFavList) {
       dispatch(getFavorites(localFavList));
     } else {
