@@ -9,9 +9,9 @@ This is a school project to display all the countries around the world.
 - Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Tech stack
-HTML
-CSS
-Javascript
-React
-Redux
-MUI
+- HTML
+- CSS
+- Javascript
+- React
+- Redux
+- MUI
