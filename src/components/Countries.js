@@ -23,7 +23,6 @@ const Countries = ({ typeName }) => {
   useEffect(() => {
     dispatch(initializeCountries());
     dispatch(initializeFavorites());
-  
   }, [dispatch]);
 
   if (isLoading) {
@@ -42,7 +41,8 @@ const Countries = ({ typeName }) => {
         container
         justifyContent="center"
         alignItems="center"
-        spacing={{ xs: 2, md: 3 }}
+        spacing="1.5rem"
+        // spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         {checkContentType()
@@ -51,14 +51,7 @@ const Countries = ({ typeName }) => {
           )
           .map((country, i) => {
             return (
-              <Grid
-                item
-                xs={4}
-                sm={2}
-                md={4}
-                key={i}
-                sx={{ textAlign: "center" }}
-              >
+              <Grid item key={i}>
                 <CountryCard country={country} favorites={favorites} />
               </Grid>
             );

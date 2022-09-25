@@ -52,9 +52,10 @@ const CountryCard = ({ country, favorites }) => {
   return (
     <Card
       sx={{
-        maxWidth: 450,
+        width: 450,
         minHeight: 450,
         margin: "0 auto",
+        textAlign: "center",
         backgroundColor: "linear-gradient(145deg, #e2e8ec, #ffffff)",
       }}
     >
@@ -77,13 +78,16 @@ const CountryCard = ({ country, favorites }) => {
         color="text.secondary"
         sx={{ display: "grid", gridTemplateColumn: "repeat(3, 1fr)" }}
       >
-        <Typography variant="h4" sx={{ fontFamily: '"Raleway", sans-serif' }}>
+        <Typography
+          variant="h5"
+          sx={{ fontFamily: '"Raleway", sans-serif', marginBottom: "1rem" }}
+        >
           {name.common}
         </Typography>
         <Grid container columns={{ xs: 4, sm: 8, md: 12 }} flexWrap="wrap">
           <Grid item xs={2} sm={4} md={4}>
             <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-              LANGUAGES
+              Languages(s)
               {languages &&
                 Object.values(languages).map((language, i) => (
                   <li key={i}>{language}</li>
@@ -93,7 +97,7 @@ const CountryCard = ({ country, favorites }) => {
 
           <Grid item xs={2} sm={4} md={4}>
             <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-              CURRENCIES
+              Currencies(s)
               {currencies &&
                 Object.values(currencies).map((currency, i) => (
                   <li key={i}>{`${currency.name}`}</li>
@@ -102,7 +106,7 @@ const CountryCard = ({ country, favorites }) => {
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
             <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-              POPULATION
+              Population
             </Typography>
             {numberFormatter(population)}
           </Grid>
@@ -113,12 +117,12 @@ const CountryCard = ({ country, favorites }) => {
         <Fab
           aria-label="like"
           onClick={() => handleFavorites(country)}
-          sx={{margin:"1rem"}}
+          sx={{ margin: "1rem" }}
         >
           <FavoriteIcon />
         </Fab>
       ) : (
-        <Button onClick={() => handleDelete(country)} sx={{margin:"1rem"}} >
+        <Button onClick={() => handleDelete(country)} sx={{ margin: "1rem" }}>
           Delete
         </Button>
       )}
