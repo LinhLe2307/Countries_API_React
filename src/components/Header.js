@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import AppBar from "@mui/material/AppBar";
@@ -14,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
 import SearchCountries from "./SearchCountries";
+import { Link } from "react-router-dom";
 
 const pages = ["HomePage", "Countries", "Favorites"];
 
@@ -33,22 +33,38 @@ const Header = () => {
   const checkHeader = (page) => {
     if (page === "HomePage") {
       return (
-        <Link to="/">
-          <Typography textAlign="center">Homepage</Typography>
+        <Link to="/" className="link">
+          <Typography
+            textAlign="center"
+            sx={{
+              marginLeft: "1rem",
+              fontFamily: '"Raleway", sans-serif',
+            }}
+          >
+            Homepage
+          </Typography>
         </Link>
       );
     } else if (page === "Favorites") {
       return (
-        <Link to={`${page.toLowerCase()}`}>
-          <Typography textAlign="center">
+        <Link to={`${page.toLowerCase()}`} className="link">
+          <Typography
+            textAlign="center"
+            sx={{ marginLeft: "1rem", fontFamily: '"Raleway", sans-serif' }}
+          >
             {page} {favorites.length}
           </Typography>
         </Link>
       );
     } else {
       return (
-        <Link to={`${page.toLowerCase()}`}>
-          <Typography textAlign="center">{page}</Typography>
+        <Link to={`${page.toLowerCase()}`} className="link">
+          <Typography
+            textAlign="center"
+            sx={{ marginLeft: "1rem", fontFamily: '"Raleway", sans-serif' }}
+          >
+            {page}
+          </Typography>
         </Link>
       );
     }
@@ -67,14 +83,14 @@ const Header = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              fontFamily: '"Raleway", sans-serif',
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            Linh Le
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -122,18 +138,18 @@ const Header = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: '"Raleway", sans-serif',
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            Linh Le
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <div key={page}>{checkHeader(page)}</div>
+              <>{checkHeader(page)}</>
             ))}
           </Box>
           <SearchCountries />
