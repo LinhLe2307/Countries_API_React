@@ -1,20 +1,17 @@
 [![CI](https://github.com/LinhLe2307/Countries_API_React/actions/workflows/main.yml/badge.svg)](https://github.com/LinhLe2307/Countries_API_React/actions/workflows/main.yml)
 
-# Getting Started with Create React App
+# Countries API App
+This is a school project to display all the countries around the world. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm install`
-Install all the required packages
-
-### `npm start`
-
-Runs the app in the development mode.\
+## Steps to follow
+First do, `npm install` to install dependencies.
+Then, run the following command: `npm start` to start the server.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech stack
+HTML
+CSS
+Javascript
+React
+Redux
+MUI
