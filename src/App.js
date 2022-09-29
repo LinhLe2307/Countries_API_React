@@ -5,6 +5,7 @@ import Layout from "./pages/Layout";
 import HomePage from "./components/HomePage";
 import Countries from "./components/Countries";
 import SingleCountry from "./components/SingleCountry";
+import { Favorite } from "@mui/icons-material";
 
 function App() {
   return (
