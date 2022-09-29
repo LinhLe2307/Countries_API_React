@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 
 const numberFormatter = (num) => {
@@ -27,11 +27,13 @@ const numberFormatter = (num) => {
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const CountryCard = ({ country, favorites }) => {
+const CountryCard = ({ country }) => {
   const { languages, name, currencies, flags, population } = country;
 
   const urlName = name.common.replaceAll(" ", "-");
   const dispatch = useDispatch();
+
+  const favorites = useSelector((state) => state.favorites.fav);
 
   const handleFavorites = (favorite) => {
     dispatch(addFavorites(favorite));

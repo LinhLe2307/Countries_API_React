@@ -4,9 +4,13 @@ import favoritesService from "../../services/local";
 export const cartSlice = createSlice({
   name: "favorites",
   initialState: {
-    fav: []
+    fav: [],
+    isLoading: false
   },
   reducers: {
+    isLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
     getFavorites: (state, action) => {
       state.fav = action.payload;
     },

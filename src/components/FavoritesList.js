@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { Box, CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { initializeCountries } from "../features/countries/countriesSlice";
+import { initializeFavorites } from "../features/favorites/cartSlice";
 import CardsList from "./CardsList";
 
-const Countries = () => {
-    const countriesList = useSelector((state) => state.countries.countries);
-    const isLoading = useSelector((state) => state.countries.isLoading);
+const FavoritesList = () => {
+    const favorites = useSelector((state) => state.favorites.fav);
+    const isLoading = useSelector((state) => state.favorites.isLoading);
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(initializeCountries())
+        dispatch(initializeFavorites());
     }, [dispatch]);
 
     if (isLoading) {
@@ -24,9 +24,8 @@ const Countries = () => {
     }
 
     return (
-        <CardsList typeName={countriesList}/>
+        <CardsList typeName={favorites} />
     )
 }
 
-
-export default Countries;
+export default FavoritesList
