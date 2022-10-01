@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from 'redux-logger'
 import countriesReducer from "../features/countries/countriesSlice";
 
 import cartReducer from "../features/favorites/cartSlice";
