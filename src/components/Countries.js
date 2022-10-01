@@ -27,7 +27,11 @@ const Countries = () => {
     );
   }
 
-  return <CardsList typeName={countriesList} />;
+  return (
+    <div className="countries-img">
+      <CardsList typeName={countriesList} />
+    </div>
+  );
 };
 
 export default Countries;

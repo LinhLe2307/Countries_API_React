@@ -1,15 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Grid, Fab } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
+
+import {
+  Button,
+  CardContent,
+  CardMedia,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  Grid,
+  Fab,
+} from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import MoneyIcon from "@mui/icons-material/Money";
+import PeopleIcon from "@mui/icons-material/People";
+import LanguageIcon from "@mui/icons-material/Language";
 
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import CountriesDetails from "./CountriesDetails";
 
 const SingleCountry = () => {
   let location = useLocation();
@@ -20,7 +36,7 @@ const SingleCountry = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { languages, name, currencies, flags, capital, borders } =
+  const { languages, name, currencies, flags, capital, borders, population } =
     location.state.country;
 
   const isFav = () => {
@@ -124,81 +140,102 @@ const SingleCountry = () => {
           padding: "1rem",
         }}
       >
-        <h1>{name.common}</h1>
-
-        <img
-          src={flags.png}
-          alt={`${name.common}`}
-          style={{ margin: "1.5rem 0" }}
+        <CardMedia
+          component="img"
+          height="194"
+          image={flags.png}
+          alt="Paella dish"
         />
-
-        <Grid
-          container
-          columns={{ xs: 4, sm: 8, md: 12 }}
-          sx={{ marginBottom: "1.5rem" }}
+        <CardContent
+          variant="body2"
+          color="text.secondary"
+          sx={{ display: "grid", gridTemplateColumn: "repeat(3, 1fr)" }}
         >
-          {/* ----------------LANGUAGES ------------------ */}
-          <Grid item xs={2} sm={4} md={4}>
-            <h3 className="center">Languages</h3>
-            {languages &&
-              Object.values(languages).map((language, i) => (
-                <p key={i} className="center">
-                  {language}
-                </p>
-              ))}
-            {/* </ul> */}
+          <Typography
+            variant="h5"
+            sx={{ fontFamily: '"Raleway", sans-serif', marginBottom: "1rem" }}
+          >
+            {name.common}
+          </Typography>
+          <Grid container columns={{ xs: 4, sm: 8, md: 12 }} flexWrap="wrap">
+            <CountriesDetails
+              languages={languages}
+              currencies={currencies}
+              population={population}
+            />
           </Grid>
-
-          {/* ----------------CURRENCIES ------------------ */}
           <Grid item xs={2} sm={4} md={4}>
-            <ul>
-              <h3 className="center">Currencies</h3>
-              {currencies &&
-                Object.values(currencies).map((currency, i) => (
-                  <p key={i} className="center">{`${currency.name}`}</p>
+            <List
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                padding: 0,
+              }}
+            >
+              <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                  }}
+                >
+                  <MoneyIcon />
+                </ListItemIcon>
+                Weather
+              </ListItem>
+              {weathers &&
+                weathers.map((weather, i) => (
+                  <ListItem
+                    key={i}
+                    disableGutters
+                    sx={{
+                      padding: 0,
+                      textAlign: "center",
+                    }}
+                  >
+                    {/* {weather.data.name === name.common ? "Country" : "Capital"}{" "}
+                    : {weather.data.name} */}
+                    <ListItemText
+                      primary={weather.data.name}
+                      primaryTypographyProps={{
+                        fontSize: 15,
+                        fontWeight: "medium",
+                        lineHeight: "20px",
+                        mb: "2px",
+                        fontFamily: '"Raleway", sans-serif',
+                      }}
+                    />
+                    {weather.data.weather.map((obj, index) => (
+                      <ListItem
+                        key={index}
+                        primary={obj.main}
+                        primaryTypographyProps={{
+                          fontSize: 15,
+                          fontWeight: "medium",
+                          lineHeight: "20px",
+                          mb: "2px",
+                          fontFamily: '"Raleway", sans-serif',
+                        }}
+                      >
+                        <CardMedia
+                          component="img"
+                          image={`https://openweathermap.org/img/wn/${obj.icon}@2x.png`}
+                        />
+                      </ListItem>
+                    ))}
+                  </ListItem>
                 ))}
-            </ul>
+            </List>
           </Grid>
-          {/* ----------------BORDERS ------------------ */}
-          <Grid item xs={2} sm={4} md={4}>
-            <h3 className="center">Borders</h3>
-            {bordersList(borderCountries)}
-          </Grid>
-        </Grid>
-
-        {/* ----------------WEATHER ------------------ */}
-        <h2>Weather</h2>
-        {weathers.map((weather, i) => (
-          <div key={i}>
-            <h3 className="center">
-              {weather.data.name === name.common ? "Country" : "Capital"} :{" "}
-              {weather.data.name}
-            </h3>
-            <div>
-              {weather.data.weather.map((obj, index) => (
-                <li key={index} className="flex-box">
-                  {obj.main}
-                  <img
-                    src={`https://openweathermap.org/img/wn/${obj.icon}@2x.png`}
-                  />
-                </li>
-              ))}
-            </div>
-          </div>
-        ))}
+        </CardContent>
         {!isFav() ? (
           <Fab
             aria-label="like"
             onClick={() => handleFavorites(location.state.country)}
-            
           >
             <FavoriteIcon />
           </Fab>
         ) : (
-          <Button
-            onClick={() => handleDelete(location.state.country)}
-           
-          >
+          <Button onClick={() => handleDelete(location.state.country)}>
             Delete
           </Button>
         )}
