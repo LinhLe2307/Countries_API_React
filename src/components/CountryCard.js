@@ -7,8 +7,15 @@ import {
   CardMedia,
   Fab,
   Grid,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
 } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import MoneyIcon from "@mui/icons-material/Money";
+import PeopleIcon from "@mui/icons-material/People";
+import LanguageIcon from "@mui/icons-material/Language";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
@@ -54,9 +61,8 @@ const CountryCard = ({ country }) => {
   return (
     <Card
       sx={{
-        width: 450,
-        minHeight: 450,
-        margin: "0 auto",
+        maxWidth: 450,
+        margin: "0.5rem",
         textAlign: "center",
         backgroundColor: "linear-gradient(145deg, #e2e8ec, #ffffff)",
       }}
@@ -88,29 +94,114 @@ const CountryCard = ({ country }) => {
         </Typography>
         <Grid container columns={{ xs: 4, sm: 8, md: 12 }} flexWrap="wrap">
           <Grid item xs={2} sm={4} md={4}>
-            <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-              Languages(s)
+            <List
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                bgcolor: "background.paper",
+                padding: 0,
+              }}
+            >
+              <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                  }}
+                >
+                  <LanguageIcon />
+                </ListItemIcon>
+                Language(s)
+              </ListItem>
               {languages &&
                 Object.values(languages).map((language, i) => (
-                  <li key={i}>{language}</li>
+                  <ListItem
+                    key={i}
+                    disableGutters
+                    sx={{
+                      padding: 0,
+                      textAlign: "center",
+                    }}
+                  >
+                    <ListItemText
+                      primary={language}
+                      primaryTypographyProps={{
+                        fontSize: 15,
+                        fontWeight: "medium",
+                        lineHeight: "20px",
+                        mb: "2px",
+                        fontFamily: '"Raleway", sans-serif',
+                      }}
+                    />
+                  </ListItem>
                 ))}
-            </Typography>
+            </List>
           </Grid>
 
           <Grid item xs={2} sm={4} md={4}>
-            <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-              Currencies(s)
+            <List
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                bgcolor: "background.paper",
+                padding: 0,
+              }}
+            >
+              <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                  }}
+                >
+                  <MoneyIcon />
+                </ListItemIcon>
+                Currencie(s)
+              </ListItem>
               {currencies &&
                 Object.values(currencies).map((currency, i) => (
-                  <li key={i}>{`${currency.name}`}</li>
+                  <ListItem
+                    key={i}
+                    disableGutters
+                    sx={{
+                      padding: 0,
+                      textAlign: "center",
+                    }}
+                  >
+                    <ListItemText
+                      primary={currency.name}
+                      primaryTypographyProps={{
+                        fontSize: 15,
+                        fontWeight: "medium",
+                        lineHeight: "20px",
+                        mb: "2px",
+                        fontFamily: '"Raleway", sans-serif',
+                      }}
+                    />
+                  </ListItem>
                 ))}
-            </Typography>
+            </List>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Typography sx={{ fontFamily: '"Raleway", sans-serif' }}>
-              Population
-            </Typography>
-            {numberFormatter(population)}
+            <List
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                bgcolor: "background.paper",
+                padding: 0,
+              }}
+            >
+              <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    padding: 0,
+                  }}
+                >
+                  <PeopleIcon />
+                </ListItemIcon>
+                Population
+              </ListItem>
+              {numberFormatter(population)}
+            </List>
           </Grid>
         </Grid>
       </CardContent>
