@@ -1,18 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Fab,
-  Grid,
-  Typography,
-} from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import CountriesDetails from "./CountriesDetails";
+import { checkIsFav } from "../reusableFunction";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -95,19 +87,7 @@ const CountryCard = ({ country }) => {
         </Grid>
       </CardContent>
 
-      {!isFav() ? (
-        <Fab
-          aria-label="like"
-          onClick={() => handleFavorites(country)}
-          sx={{ margin: "1rem" }}
-        >
-          <FavoriteIcon />
-        </Fab>
-      ) : (
-        <Button onClick={() => handleDelete(country)} sx={{ margin: "1rem" }}>
-          Delete
-        </Button>
-      )}
+      {checkIsFav(isFav, handleFavorites, handleDelete, country)}
     </Card>
   );
 };

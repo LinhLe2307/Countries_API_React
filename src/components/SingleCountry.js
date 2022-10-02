@@ -14,16 +14,15 @@ import {
   ListItemText,
   Typography,
   Grid,
-  Fab,
 } from "@mui/material";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import FlagIcon from "@mui/icons-material/Flag";
 
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import CountriesDetails from "./CountriesDetails";
+import { detailHeader } from "../reusableFunction";
+import { checkIsFav } from "../reusableFunction";
 
 const SingleCountry = () => {
   let location = useLocation();
@@ -36,21 +35,6 @@ const SingleCountry = () => {
 
   const { languages, name, currencies, flags, capital, borders, population } =
     location.state.country;
-
-  const detailHeader = (header, icon) => {
-    return (
-      <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
-        <ListItemIcon
-          sx={{
-            minWidth: 0,
-          }}
-        >
-          {icon}
-        </ListItemIcon>
-        {header}
-      </ListItem>
-    );
-  };
 
   const isFav = () => {
     return favorites &&
@@ -155,9 +139,15 @@ const SingleCountry = () => {
           alignItems: "center",
           flexDirection: "column",
           padding: "1rem",
+          borderRadius: "20px",
         }}
       >
-        <CardMedia component="img" image={flags.png} alt="Paella dish" />
+        <CardMedia
+          component="img"
+          image={flags.png}
+          alt="Paella dish"
+          sx={{ borderRadius: "15px" }}
+        />
         <CardContent
           variant="body2"
           color="text.secondary"
@@ -252,7 +242,7 @@ const SingleCountry = () => {
                             component="img"
                             image={`https://openweathermap.org/img/wn/${obj.icon}@2x.png`}
                             sx={{
-                              width: "3rem",
+                              width: "6rem",
                             }}
                           />
                         </ListItem>
@@ -263,21 +253,11 @@ const SingleCountry = () => {
             </Grid>
           </Grid>
         </CardContent>
-        {!isFav() ? (
-          <Fab
-            aria-label="like"
-            onClick={() => handleFavorites(location.state.country)}
-            sx={{ marginBottom: "2rem" }}
-          >
-            <FavoriteIcon />
-          </Fab>
-        ) : (
-          <Button
-            onClick={() => handleDelete(location.state.country)}
-            sx={{ marginBottom: "2rem" }}
-          >
-            Delete
-          </Button>
+        {checkIsFav(
+          isFav,
+          handleFavorites,
+          handleDelete,
+          location.state.country
         )}
 
         <Button

@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid, List, ListItem, ListItemText } from "@mui/material";
-import ListItemIcon from "@mui/material/ListItemIcon";
+
 import MoneyIcon from "@mui/icons-material/Money";
 import PeopleIcon from "@mui/icons-material/People";
 import LanguageIcon from "@mui/icons-material/Language";
+import { detailHeader } from "../reusableFunction";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -17,20 +18,6 @@ const numberFormatter = (num) => {
   }
 };
 
-const detailHeader = (header, icon) => {
-  return (
-    <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
-      <ListItemIcon
-        sx={{
-          minWidth: 0,
-        }}
-      >
-        {icon}
-      </ListItemIcon>
-      {header}
-    </ListItem>
-  );
-};
 
 const CountriesDetails = ({
   languages,

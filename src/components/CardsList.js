@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { Box } from "@mui/material";
+import { Box, Fab } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import NavigationIcon from "@mui/icons-material/Navigation";
 import CountryCard from "./CountryCard";
 
 const CardsList = ({ typeName }) => {
@@ -30,21 +30,27 @@ const CardsList = ({ typeName }) => {
               </Grid>
             );
           })}
-        <Button
-          variant="contained"
+        <Fab
+          color="primary"
+          aria-label="up"
+          id="backToTop"
           onClick={() =>
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            })
           }
           sx={{
             position: "fixed",
-            right: "2rem",
-            bottom: "2rem",
+            right: "1rem",
+            bottom: "1rem",
             boxShadow:
               "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
           }}
         >
-          Up to Top
-        </Button>
+          <NavigationIcon />
+        </Fab>
       </Grid>
     </Box>
   );
