@@ -20,7 +20,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import FlagIcon from "@mui/icons-material/Flag";
 
-import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -37,6 +36,21 @@ const SingleCountry = () => {
 
   const { languages, name, currencies, flags, capital, borders, population } =
     location.state.country;
+
+  const detailHeader = (header, icon) => {
+    return (
+      <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+          }}
+        >
+          {icon}
+        </ListItemIcon>
+        {header}
+      </ListItem>
+    );
+  };
 
   const isFav = () => {
     return favorites &&
@@ -179,18 +193,7 @@ const SingleCountry = () => {
                   padding: 0,
                 }}
               >
-                <ListItem
-                  sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                    }}
-                  >
-                    <FlagIcon />
-                  </ListItemIcon>
-                  Borders
-                </ListItem>
+                {detailHeader("Border(s)", <FlagIcon />)}
                 {bordersList(borderCountries)}
               </List>
             </Grid>
@@ -204,18 +207,7 @@ const SingleCountry = () => {
                   margin: "0 auto",
                 }}
               >
-                <ListItem
-                  sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                    }}
-                  >
-                    <ThermostatIcon />
-                  </ListItemIcon>
-                  Weather
-                </ListItem>
+                {detailHeader("Weather", <ThermostatIcon />)}
                 {weathers &&
                   weathers.map((weather, i) => (
                     <ListItem

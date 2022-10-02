@@ -17,9 +17,26 @@ const numberFormatter = (num) => {
   }
 };
 
-const CountriesDetails = ({ languages, currencies, population }) => {
-  const detailsList = [{ Languages: languages }, { Currencies: currencies }];
+const detailHeader = (header, icon) => {
+  return (
+    <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
+      <ListItemIcon
+        sx={{
+          minWidth: 0,
+        }}
+      >
+        {icon}
+      </ListItemIcon>
+      {header}
+    </ListItem>
+  );
+};
 
+const CountriesDetails = ({
+  languages,
+  currencies,
+  population
+}) => {
   return (
     <>
       {/* ---------LANGUAGES---------- */}
@@ -31,16 +48,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             padding: 0,
           }}
         >
-          <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-              }}
-            >
-              <LanguageIcon />
-            </ListItemIcon>
-            Language(s)
-          </ListItem>
+          {detailHeader("Language(s)", <LanguageIcon />)}
           {languages &&
             Object.values(languages).map((language, i) => (
               <ListItem
@@ -59,7 +67,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
                     display: "list-item",
                     listStylePosition: "inside",
                     marginTop: 0,
-                    marginBottom: "1rem",
+                    marginBottom: "0.5rem",
                   }}
                 >
                   {language}
@@ -78,16 +86,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             padding: 0,
           }}
         >
-          <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-              }}
-            >
-              <MoneyIcon />
-            </ListItemIcon>
-            Currencies
-          </ListItem>
+          {detailHeader("Currencies", <MoneyIcon />)}
           {currencies &&
             Object.values(currencies).map((currency, i) => (
               <ListItem
@@ -126,17 +125,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             padding: 0,
           }}
         >
-          <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                padding: 0,
-              }}
-            >
-              <PeopleIcon />
-            </ListItemIcon>
-            Population
-          </ListItem>
+          {detailHeader("Population", <PeopleIcon />)}
           <ListItem
             disableGutters
             sx={{
