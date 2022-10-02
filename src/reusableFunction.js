@@ -21,7 +21,9 @@ export const checkIsFav = (isFav, handleFavorites, handleDelete, country) => {
     <Fab
       aria-label="like"
       onClick={() => handleFavorites(country)}
-      sx={{ margin: "1rem" }}
+      sx={{
+        margin: "1rem",
+      }}
     >
       <FavoriteIcon />
     </Fab>
@@ -31,4 +33,3 @@ export const checkIsFav = (isFav, handleFavorites, handleDelete, country) => {
     </Button>
   );
 };
-

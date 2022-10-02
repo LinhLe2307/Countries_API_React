@@ -20,9 +20,8 @@ import FlagIcon from "@mui/icons-material/Flag";
 
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
-import CountriesDetails from "./CountriesDetails";
-import { detailHeader } from "../reusableFunction";
-import { checkIsFav } from "../reusableFunction";
+import DetailsInfo from "./card/DetailsInfo";
+import { detailHeader, checkIsFav } from "../reusableFunction";
 
 const SingleCountry = () => {
   let location = useLocation();
@@ -169,7 +168,7 @@ const SingleCountry = () => {
             {name.common}
           </Typography>
           <Grid container columns={{ xs: 4, sm: 8, md: 12 }} flexWrap="wrap">
-            <CountriesDetails
+            <DetailsInfo
               languages={languages}
               currencies={currencies}
               population={population}

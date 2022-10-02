@@ -4,7 +4,7 @@ import { Grid, List, ListItem, ListItemText } from "@mui/material";
 import MoneyIcon from "@mui/icons-material/Money";
 import PeopleIcon from "@mui/icons-material/People";
 import LanguageIcon from "@mui/icons-material/Language";
-import { detailHeader } from "../reusableFunction";
+import { detailHeader } from "../../reusableFunction";
 
 const numberFormatter = (num) => {
   if (num >= 1000000000) {
@@ -18,12 +18,7 @@ const numberFormatter = (num) => {
   }
 };
 
-
-const CountriesDetails = ({
-  languages,
-  currencies,
-  population
-}) => {
+const DetailsInfo = ({ languages, currencies, population }) => {
   return (
     <>
       {/* ---------LANGUAGES---------- */}
@@ -54,7 +49,7 @@ const CountriesDetails = ({
                     display: "list-item",
                     listStylePosition: "inside",
                     marginTop: 0,
-                    marginBottom: "0.5rem",
+                   
                   }}
                 >
                   {language}
@@ -93,7 +88,7 @@ const CountriesDetails = ({
                     display: "list-item",
                     listStylePosition: "inside",
                     marginTop: 0,
-                    marginBottom: "1rem",
+                    
                   }}
                 >
                   {currency.name}
@@ -138,4 +133,4 @@ const CountriesDetails = ({
   );
 };
 
-export default CountriesDetails;
+export default DetailsInfo;

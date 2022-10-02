@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
-import CountriesDetails from "./CountriesDetails";
-import { checkIsFav } from "../reusableFunction";
+import {
+  addFavorites,
+  removeFavorite,
+} from "../../features/favorites/cartSlice";
+import DetailsInfo from "./DetailsInfo";
+import { checkIsFav } from "../../reusableFunction";
 
-const CountryCard = ({ country }) => {
+const SingleCard = ({ country }) => {
   const { languages, name, currencies, flags, population } = country;
 
   const urlName = name.common.replaceAll(" ", "-");
@@ -36,12 +39,13 @@ const CountryCard = ({ country }) => {
         borderRadius: "20px",
         maxWidth: 450,
         margin: "0.5rem",
+        height: "100%",
         textAlign: "center",
         background: "linear-gradient(145deg, #e2e8ec, #ffffff)",
         boxShadow: "5px 5px 15px #d1d9e6, -5px -5px 15px #ffffff",
       }}
     >
-      <CardContent className="card-container">
+      <CardContent className="card-container" >
         <Link
           to={`${urlName}`}
           state={{
@@ -77,7 +81,7 @@ const CountryCard = ({ country }) => {
           {name.common}
         </Typography>
         <Grid container columns={{ xs: 4, sm: 8, md: 12 }} flexWrap="wrap">
-          <CountriesDetails
+          <DetailsInfo
             languages={languages}
             currencies={currencies}
             population={population}
@@ -90,4 +94,4 @@ const CountryCard = ({ country }) => {
   );
 };
 
-export default CountryCard;
+export default SingleCard;

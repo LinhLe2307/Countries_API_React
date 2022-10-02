@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { initializeCountries } from "../features/countries/countriesSlice";
-import CardsList from "./CardsList";
+import ListCards from "./card/ListCards";
 
 const Countries = () => {
   const countriesList = useSelector((state) => state.countries.countries);
@@ -27,11 +27,7 @@ const Countries = () => {
     );
   }
 
-  return (
-    <div className="countries-img">
-      <CardsList typeName={countriesList} />
-    </div>
-  );
+  return <ListCards typeName={countriesList} />;
 };
 
 export default Countries;

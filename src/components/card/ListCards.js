@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { Box, Fab } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import NavigationIcon from "@mui/icons-material/Navigation";
-import CountryCard from "./CountryCard";
+import SingleCard from "./SingleCard";
 
-const CardsList = ({ typeName }) => {
+const ListCards = ({ typeName }) => {
   const searchInput = useSelector((state) => state.countries.search);
 
   return (
@@ -14,10 +14,10 @@ const CardsList = ({ typeName }) => {
       <Grid
         container
         justifyContent="center"
-        // alignItems="center"
         alignItems="stretch"
         spacing="0.5rem"
         columns={{ xs: 4, sm: 8, md: 12 }}
+        sx={{ gridAutoRows: "1fr" }}
       >
         {typeName
           .filter((c) =>
@@ -26,7 +26,7 @@ const CardsList = ({ typeName }) => {
           .map((country, i) => {
             return (
               <Grid item key={i}>
-                <CountryCard country={country} />
+                <SingleCard country={country} />
               </Grid>
             );
           })}
@@ -56,4 +56,4 @@ const CardsList = ({ typeName }) => {
   );
 };
 
-export default CardsList;
+export default ListCards;
