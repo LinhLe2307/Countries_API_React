@@ -58,6 +58,7 @@ const SingleCountry = () => {
         const newBorderName = borderCountry.name.common.replaceAll(" ", "-");
         return (
           <ListItem
+            button
             disableGutters
             sx={{
               p: "0 0 0 1rem",
