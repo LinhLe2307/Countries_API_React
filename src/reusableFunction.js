@@ -1,4 +1,4 @@
-import { Button, Fab, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Button, Fab, ListItem, ListItemIcon } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export const detailHeader = (header, icon) => {

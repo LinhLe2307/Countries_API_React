@@ -6,8 +6,6 @@ import { addFavorites, removeFavorite } from "../features/favorites/cartSlice";
 import CountriesDetails from "./CountriesDetails";
 import { checkIsFav } from "../reusableFunction";
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
 const CountryCard = ({ country }) => {
   const { languages, name, currencies, flags, population } = country;
 
