@@ -17,9 +17,8 @@ import {
   Fab,
 } from "@mui/material";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import MoneyIcon from "@mui/icons-material/Money";
-import PeopleIcon from "@mui/icons-material/People";
-import LanguageIcon from "@mui/icons-material/Language";
+import ThermostatIcon from "@mui/icons-material/Thermostat";
+import FlagIcon from "@mui/icons-material/Flag";
 
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -57,34 +56,38 @@ const SingleCountry = () => {
 
   const bordersList = (borderCountries) => {
     if (borderCountries.length > 0) {
-      return (
-        <div className="center">
-          {borderCountries.map((borderCountry, i) => {
-            const newBorderName = borderCountry.name.common.replaceAll(
-              " ",
-              "-"
-            );
-            return (
-              <div>
-                <Link
-                  key={i}
-                  sx={{ fontFamily: "inherit" }}
-                  underline="hover"
-                  onClick={() =>
-                    navigate(`/countries/${newBorderName}`, {
-                      state: {
-                        country: borderCountry,
-                      },
-                    })
-                  }
-                >
-                  {borderCountry.name.common}
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      );
+      return borderCountries.map((borderCountry, i) => {
+        const newBorderName = borderCountry.name.common.replaceAll(" ", "-");
+        return (
+          <ListItem
+            disableGutters
+            sx={{
+              p: "0 0 0 1rem",
+            }}
+          >
+            <ListItemText
+              disableTypography="true"
+              type="body2"
+              onClick={() =>
+                navigate(`/countries/${newBorderName}`, {
+                  state: {
+                    country: borderCountry,
+                  },
+                })
+              }
+              sx={{
+                fontFamily: "inherit",
+                listStyleType: "disc",
+                display: "list-item",
+                listStylePosition: "inside",
+                margin: 0,
+              }}
+            >
+              {borderCountry.name.common}
+            </ListItemText>
+          </ListItem>
+        );
+      });
     } else {
       return <p className="center">No borders</p>;
     }
@@ -124,10 +127,10 @@ const SingleCountry = () => {
       sx={{
         backgroundImage:
           'url("https://images.unsplash.com/photo-1589519160732-57fc498494f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80")',
-        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        paddingTop: "1rem",
       }}
     >
       <Card
@@ -140,16 +143,14 @@ const SingleCountry = () => {
           padding: "1rem",
         }}
       >
-        <CardMedia
-          component="img"
-          height="194"
-          image={flags.png}
-          alt="Paella dish"
-        />
+        <CardMedia component="img" image={flags.png} alt="Paella dish" />
         <CardContent
           variant="body2"
           color="text.secondary"
-          sx={{ display: "grid", gridTemplateColumn: "repeat(3, 1fr)" }}
+          sx={{
+            display: "grid",
+            gridTemplateColumn: "repeat(3, 1fr)",
+          }}
         >
           <Typography
             variant="h5"
@@ -163,68 +164,106 @@ const SingleCountry = () => {
               currencies={currencies}
               population={population}
             />
-          </Grid>
-          <Grid item xs={2} sm={4} md={4}>
-            <List
-              sx={{
-                width: "100%",
-                maxWidth: 360,
-                padding: 0,
-              }}
-            >
-              <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                  }}
+
+            {/* ----------- BORDERS -------- */}
+            <Grid item xs={2} sm={4} md={4}>
+              <List
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  padding: 0,
+                }}
+              >
+                <ListItem
+                  sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}
                 >
-                  <MoneyIcon />
-                </ListItemIcon>
-                Weather
-              </ListItem>
-              {weathers &&
-                weathers.map((weather, i) => (
-                  <ListItem
-                    key={i}
-                    disableGutters
+                  <ListItemIcon
                     sx={{
-                      padding: 0,
-                      textAlign: "center",
+                      minWidth: 0,
                     }}
                   >
-                    {/* {weather.data.name === name.common ? "Country" : "Capital"}{" "}
-                    : {weather.data.name} */}
-                    <ListItemText
-                      primary={weather.data.name}
-                      primaryTypographyProps={{
-                        fontSize: 15,
-                        fontWeight: "medium",
-                        lineHeight: "20px",
-                        mb: "2px",
-                        fontFamily: '"Raleway", sans-serif',
+                    <FlagIcon />
+                  </ListItemIcon>
+                  Borders
+                </ListItem>
+                {bordersList(borderCountries)}
+              </List>
+            </Grid>
+
+            <Grid item xs={12} sm={4} md={8}>
+              <List
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  padding: 0,
+                  margin: "0 auto",
+                }}
+              >
+                <ListItem
+                  sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                    }}
+                  >
+                    <ThermostatIcon />
+                  </ListItemIcon>
+                  Weather
+                </ListItem>
+                {weathers &&
+                  weathers.map((weather, i) => (
+                    <ListItem
+                      key={i}
+                      disableGutters
+                      sx={{
+                        padding: " 0 0 0 1.5rem",
                       }}
-                    />
-                    {weather.data.weather.map((obj, index) => (
-                      <ListItem
-                        key={index}
-                        primary={obj.main}
-                        primaryTypographyProps={{
-                          fontSize: 15,
-                          fontWeight: "medium",
-                          lineHeight: "20px",
-                          mb: "2px",
+                    >
+                      <ListItemText
+                        disableTypography="true"
+                        type="body2"
+                        style={{
                           fontFamily: '"Raleway", sans-serif',
+                          listStyleType: "disc",
+                          display: "list-item",
+                          listStylePosition: "inside",
+                          marginTop: 0,
+                          marginBottom: 0,
                         }}
                       >
-                        <CardMedia
-                          component="img"
-                          image={`https://openweathermap.org/img/wn/${obj.icon}@2x.png`}
-                        />
-                      </ListItem>
-                    ))}
-                  </ListItem>
-                ))}
-            </List>
+                        {weather.data.name === name.common
+                          ? "Country"
+                          : "Capital"}{" "}
+                        : {weather.data.name}
+                      </ListItemText>
+                      {weather.data.weather.map((obj, index) => (
+                        <ListItem key={index}>
+                          <ListItemText
+                            primary={obj.main}
+                            primaryTypographyProps={{
+                              fontSize: 15,
+                              fontWeight: "medium",
+
+                              // mb: "2px",
+                              fontFamily: '"Raleway", sans-serif',
+                              textAlign: "right",
+                            }}
+                          />
+
+                          <CardMedia
+                            component="img"
+                            image={`https://openweathermap.org/img/wn/${obj.icon}@2x.png`}
+                            sx={{
+                              width: "3rem",
+                            }}
+                          />
+                        </ListItem>
+                      ))}
+                    </ListItem>
+                  ))}
+              </List>
+            </Grid>
           </Grid>
         </CardContent>
         {!isFav() ? (

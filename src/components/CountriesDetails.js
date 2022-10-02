@@ -18,8 +18,11 @@ const numberFormatter = (num) => {
 };
 
 const CountriesDetails = ({ languages, currencies, population }) => {
+  const detailsList = [{ Languages: languages }, { Currencies: currencies }];
+
   return (
     <>
+      {/* ---------LANGUAGES---------- */}
       <Grid item xs={2} sm={4} md={4}>
         <List
           sx={{
@@ -28,7 +31,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             padding: 0,
           }}
         >
-          <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+          <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
             <ListItemIcon
               sx={{
                 minWidth: 0,
@@ -44,25 +47,29 @@ const CountriesDetails = ({ languages, currencies, population }) => {
                 key={i}
                 disableGutters
                 sx={{
-                  padding: 0,
-                  textAlign: "center",
+                  p: "0 0 0 1rem",
                 }}
               >
                 <ListItemText
-                  primary={language}
-                  primaryTypographyProps={{
-                    fontSize: 15,
-                    fontWeight: "medium",
-                    lineHeight: "20px",
-                    mb: "2px",
+                  disableTypography="true"
+                  type="body2"
+                  style={{
                     fontFamily: '"Raleway", sans-serif',
+                    listStyleType: "disc",
+                    display: "list-item",
+                    listStylePosition: "inside",
+                    marginTop: 0,
+                    marginBottom: "1rem",
                   }}
-                />
+                >
+                  {language}
+                </ListItemText>
               </ListItem>
             ))}
         </List>
       </Grid>
 
+      {/* ---------CURRENCIES---------- */}
       <Grid item xs={2} sm={4} md={4}>
         <List
           sx={{
@@ -71,7 +78,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             padding: 0,
           }}
         >
-          <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+          <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
             <ListItemIcon
               sx={{
                 minWidth: 0,
@@ -79,7 +86,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             >
               <MoneyIcon />
             </ListItemIcon>
-            Currencie(s)
+            Currencies
           </ListItem>
           {currencies &&
             Object.values(currencies).map((currency, i) => (
@@ -92,19 +99,25 @@ const CountriesDetails = ({ languages, currencies, population }) => {
                 }}
               >
                 <ListItemText
-                  primary={currency.name}
-                  primaryTypographyProps={{
-                    fontSize: 15,
-                    fontWeight: "medium",
-                    lineHeight: "20px",
-                    mb: "2px",
+                  disableTypography="true"
+                  type="body2"
+                  style={{
                     fontFamily: '"Raleway", sans-serif',
+                    listStyleType: "disc",
+                    display: "list-item",
+                    listStylePosition: "inside",
+                    marginTop: 0,
+                    marginBottom: "1rem",
                   }}
-                />
+                >
+                  {currency.name}
+                </ListItemText>
               </ListItem>
             ))}
         </List>
       </Grid>
+
+      {/* ---------POPULATION---------- */}
       <Grid item xs={2} sm={4} md={4}>
         <List
           sx={{
@@ -113,7 +126,7 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             padding: 0,
           }}
         >
-          <ListItem sx={{ fontFamily: '"Raleway", sans-serif' }}>
+          <ListItem sx={{ fontFamily: '"Raleway", sans-serif', fontSize: 18 }}>
             <ListItemIcon
               sx={{
                 minWidth: 0,
@@ -124,7 +137,25 @@ const CountriesDetails = ({ languages, currencies, population }) => {
             </ListItemIcon>
             Population
           </ListItem>
-          {numberFormatter(population)}
+          <ListItem
+            disableGutters
+            sx={{
+              padding: 0,
+              textAlign: "center",
+            }}
+          >
+            <ListItemText
+              primary={numberFormatter(population)}
+              primaryTypographyProps={{
+                fontSize: 15,
+                fontWeight: "medium",
+                lineHeight: "20px",
+                mb: "2px",
+                fontFamily: '"Raleway", sans-serif',
+                marginBottom: "1rem",
+              }}
+            />
+          </ListItem>
         </List>
       </Grid>
     </>
