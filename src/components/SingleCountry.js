@@ -154,7 +154,12 @@ const SingleCountry = () => {
         >
           <Typography
             variant="h5"
-            sx={{ fontFamily: '"Raleway", sans-serif', marginBottom: "1rem" }}
+            sx={{
+              fontFamily: '"Raleway", sans-serif',
+              marginBottom: "1rem",
+              textAlign: "center",
+              fontSize: 32,
+            }}
           >
             {name.common}
           </Typography>
@@ -270,11 +275,15 @@ const SingleCountry = () => {
           <Fab
             aria-label="like"
             onClick={() => handleFavorites(location.state.country)}
+            sx={{ marginBottom: "2rem" }}
           >
             <FavoriteIcon />
           </Fab>
         ) : (
-          <Button onClick={() => handleDelete(location.state.country)}>
+          <Button
+            onClick={() => handleDelete(location.state.country)}
+            sx={{ marginBottom: "2rem" }}
+          >
             Delete
           </Button>
         )}
